@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getByAsset, getAll, getByClient } from '../services/ativos.services';
+import { getByAsset, getAll, getByClient } from '../services/ativos.service';
 
 const getByParameter = async (req: Request, res: Response) => {
   const { cliente, ativo } = req.query;
