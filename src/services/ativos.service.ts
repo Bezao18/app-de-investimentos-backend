@@ -1,5 +1,5 @@
 import IClient from '../interfaces/IClient'
-import getAssetsBy from '../models/ativos.model'
+import getAssetsBy from '../database/models/ativos.model'
 
 const getByClient = async (clientId: number): Promise<IClient[]> => {
   const clientsAssets: Promise<IClient[]> = getAssetsBy(clientId);

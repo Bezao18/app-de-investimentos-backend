@@ -1,5 +1,4 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
     "target": "es2016",                                 
     "module": "commonjs",
@@ -11,5 +10,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include":["*/*"] 
+  "include":["src/*", "src/database/config", "src/database/models"] 
 }
