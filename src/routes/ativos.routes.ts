@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import controller from '../controllers/ativos.controller'
+import ativos from '../controllers/ativos.controller'
 
 const ativosRoutes = Router();
 
-ativosRoutes.get('/', controller.getAssets);
+ativosRoutes.get('/', ativos.getByParameter);
 
 export default ativosRoutes
