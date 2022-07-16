@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import controller from '../controllers/ativos.controller'
 
 const ativosRoutes = Router();
 
-ativosRoutes.get('/', () => { console.log('Rota funcionando') });
+ativosRoutes.get('/', controller.getAssets);
 
 export default ativosRoutes
