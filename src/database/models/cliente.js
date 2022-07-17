@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   }, { timestamps: false });
 
   Cliente.associate = (models) => {
-   
+    Cliente.hasMany(models.Ordem,
+      {foreignKey:'CodCliente', as: 'Ordens'})
   }
 
   return Cliente;

@@ -5,16 +5,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    CodAtivo: DataTypes.INTEGER,
     CodCliente: DataTypes.INTEGER,
+    CodAtivo: DataTypes.INTEGER,
+    QtdeAtivo: DataTypes.INTEGER,
     Valor: DataTypes.FLOAT,
     Tipo: DataTypes.STRING,
     Horário: DataTypes.DATE,
   }, { timestamps: false });
 
   Ordem.associate = (models) => {
-   
+    Ordem.belongsTo(models.Cliente,
+      { foreignKey: 'CodCliente', as: 'Ordens' })
+    Ordem.belongsTo(models.Ativo,
+      { foreignKey: 'CodAtivo', as: 'Ordens' })
   }
+
 
   return Ordem;
 };

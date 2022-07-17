@@ -7,6 +7,13 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      }, CodCliente: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clientes',
+          key: 'CodCliente'
+        }
       },
       CodAtivo: {
         allowNull: false,
@@ -16,14 +23,10 @@ module.exports = {
           key: 'CodAtivo'
         }
       },
-      CodCliente: {
+      QtdeAtivo: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Clientes',
-          key: 'CodCliente'
-        }
-      },
+      },     
       Valor: {
         allowNull: false,
         type: Sequelize.FLOAT
@@ -32,8 +35,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      Horário: Sequelize.DATE,
-      createdAt: {
+      Horário: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now')

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
     "build": "tsc",
-    "dev": "nodemon --watch \"./src/*\" --ext \"ts,js\" --exec \"ts-node src/index.ts\""
+    "dev": "nodemon --watch \"./src/*\" --ext \"ts,js\" --exec \"ts-node src/index.ts\"",
+    "db:reset": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "keywords": [],
   "author": "",

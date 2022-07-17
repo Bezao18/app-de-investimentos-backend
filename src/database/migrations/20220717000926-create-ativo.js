@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      QtdeAtivo: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },     
       Valor: {
         type: Sequelize.FLOAT
       }
