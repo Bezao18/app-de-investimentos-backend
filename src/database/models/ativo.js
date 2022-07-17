@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Ativo = sequelize.define("Ativo", {
     CodAtivo: {

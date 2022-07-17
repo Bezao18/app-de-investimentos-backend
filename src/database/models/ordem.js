@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Ordem = sequelize.define("Ordem", {
     OrdemId: {
@@ -8,16 +7,16 @@ module.exports = (sequelize, DataTypes) => {
     CodCliente: DataTypes.INTEGER,
     CodAtivo: DataTypes.INTEGER,
     QtdeAtivo: DataTypes.INTEGER,
-    Valor: DataTypes.FLOAT,
+    ValorPago: DataTypes.FLOAT,
     Tipo: DataTypes.STRING,
     Horário: DataTypes.DATE,
   }, { timestamps: false });
 
   Ordem.associate = (models) => {
-    Ordem.belongsTo(models.Cliente,
-      { foreignKey: 'CodCliente', as: 'Ordens' })
     Ordem.belongsTo(models.Ativo,
-      { foreignKey: 'CodAtivo', as: 'Ordens' })
+      { foreignKey: 'CodAtivo', as: 'Ativo' })
+    Ordem.belongsTo(models.Cliente,
+      { foreignKey: 'CodCliente', as: 'Cliente' })
   }
 
 
