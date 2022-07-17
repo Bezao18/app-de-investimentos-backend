@@ -1,16 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Cliente = sequelize.define("Cliente", {
-    CodCliente: {
+  const Cliente = sequelize.define("Ativo", {
+    CodAtivo: {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    Saldo: DataTypes.FLOAT,
+    Valor: DataTypes.FLOAT,
   }, { timestamps: false });
 
-  Cliente.associate = (models) => {
+  Ativo.associate = (models) => {
    
   }
 
-  return Cliente;
+  return Ativo;
 };
