@@ -1,10 +1,15 @@
 import sequelize from 'sequelize';
 import IClient from '../interfaces/IClient'
-const { Ativo } = require('../database/models');
+const { Ativo, Cliente } = require('../database/models');
 import IOrder from '../interfaces/IOrder';
 import getClientsOrders from '../utils/getClientsOrders';
+import HTTPErrorMessage from '../utils/HTTPErrorMessage';
 
 const getClientPortfolio = async (clientId: number): Promise<any> => {
+  const client: Promise<any> = await Cliente.findByPk(clientId, { attributes: ['CodCliente'] })
+  if (!client) {
+    throw new HTTPErrorMessage(404, 'Esse cliente não existe')
+  }
   const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
   const sellOrders: IOrder[] = await getClientsOrders(clientId, 'Venda');
 
@@ -27,19 +32,22 @@ const getClientPortfolio = async (clientId: number): Promise<any> => {
       QtdeAtivo: compra.QtdeAtivo,
       Valor
     }
-    
+
     return portfolio
   }
   )
   return clientPortfolio;
 }
 
-const getAsset = (assetId: number): Promise<any>[] => {
-  const asset: Promise<any>[] = Ativo.findByPk(assetId)
+const getAsset = async (assetId: number): Promise<any> => {
+  const asset: Promise<any> = await Ativo.findByPk(assetId)
+  if (!asset) {
+    throw new HTTPErrorMessage(404, 'Esse ativo não existe')
+  }
   return asset;
 }
 
-const getAll = (): Promise<any>[]  => {
+const getAll = (): Promise<any>[] => {
   const asset: Promise<any>[] = Ativo.findAll()
   return asset;
 }

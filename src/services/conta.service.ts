@@ -1,3 +1,5 @@
+import HTTPErrorMessage from "../utils/HTTPErrorMessage";
+
 const { Cliente } = require('../database/models')
 
 export const getClientInfo = (clientId: number) => {
@@ -9,7 +11,10 @@ export const withdrawRequest = async (transactionInfo:any) => {
   const {CodCliente, Valor} = transactionInfo;
   const {Saldo} = await Cliente.findByPk(Number(CodCliente) , {attributes:['Saldo']});
   if(Number(Valor) > Saldo) {
-    return {message: `Saldo insuficiente para sacar R$${Valor}`}
+    throw new HTTPErrorMessage(400, `Saldo insuficiente para sacar R$${Valor}`)
+  }
+  if(Number(Valor) < 0) {
+    throw new HTTPErrorMessage(400, `Não é possível sacar um valor negativo`)
   }
   const SaldoAtual = Saldo - Number(Valor)
   await Cliente.update({Saldo: SaldoAtual}, {where:{CodCliente}})
