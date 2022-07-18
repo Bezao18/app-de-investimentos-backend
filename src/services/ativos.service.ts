@@ -1,25 +1,55 @@
+import sequelize from 'sequelize';
 import IClient from '../interfaces/IClient'
 const { Ordem, Cliente, Ativo } = require('../database/models')
 
 const getByClient = async (clientId: number): Promise<any> => {
-  const clientsAssets: any[] = await Ordem.findAll({
+  const clientsBuyOrders: any[] = await Ordem.findAll({
     include: [
-      { model: Ativo, as: 'Ativo', attributes: { exclude: ['QtdeAtivo', 'CodAtivo'] }},
+      { model: Ativo, as: 'Ativo', attributes: ['Valor']},
     ],
-    where: { CodCliente: clientId },
-    attributes: {exclude:['QtdeAtivo']}
+    group: ['Ordem.CodAtivo', 'Ativo.CodAtivo', 'CodCliente', 'Tipo'],
+    having: { CodCliente: clientId, Tipo: 'Compra' },
+    attributes: [
+      'CodCliente', 'CodAtivo',
+      [sequelize.fn("SUM", sequelize.col('Ordem.QtdeAtivo')), 'QtdeAtivo']
+      ,'Tipo'
+    ],
+    order: ['CodAtivo']
   }
   );
 
-  const count: any = {}
- 
-  const assetQuantity = clientsAssets.forEach((element) => {
-    count[element.CodAtivo] = (count[element.CodAtivo] || 0) + 1;
-  })
-  
-  const repeatedAssets =  clientsAssets.find((element:any) => element.CodAtivo === 1 )
-  
-  return clientsAssets;
+  const clientsSellOrders: any[] = await Ordem.findAll({
+    include: [
+      { model: Ativo, as: 'Ativo', attributes: ['Valor']}, // Esse valor representa a cotação atual
+    ],
+    group: ['Ordem.CodAtivo', 'Ativo.CodAtivo', 'CodCliente', 'Tipo'],
+    having: { CodCliente: clientId, Tipo: 'Venda' },
+    attributes: [
+      'CodCliente', 'CodAtivo',
+      [sequelize.fn("SUM", sequelize.col('Ordem.QtdeAtivo')), 'QtdeAtivo']
+      ,'Tipo'
+    ],
+    order: ['CodAtivo']
+  }
+  );
+
+  const test = clientsBuyOrders.map((compra, i) => {
+    const venda = clientsSellOrders[i]
+    if (venda.CodAtivo === compra.CodAtivo) {
+      const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
+      const { CodCliente, CodAtivo, Ativo: {Valor} } = compra
+      const object = {
+        CodCliente,
+        CodAtivo,
+        QtdeAtivo,
+        Valor
+      }
+      return  object
+    }
+  }
+  )
+
+  return test;
 }
 
 

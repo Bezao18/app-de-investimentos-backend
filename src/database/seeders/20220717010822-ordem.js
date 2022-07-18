@@ -34,11 +34,44 @@ module.exports = {
         QtdeAtivo: 1000,
         ValorPago: 17.55,
         Tipo: 'Compra'
-      }, {
+      }, 
+      {
         OrdemId: 5,
         CodCliente: 1,
         CodAtivo: 1,
         QtdeAtivo: 400,
+        ValorPago: 58.55,
+        Tipo: 'Compra'
+      },
+      {
+        OrdemId: 6,
+        CodCliente: 1,
+        CodAtivo: 1,
+        QtdeAtivo: 400,
+        ValorPago: 58.55,
+        Tipo: 'Venda'
+      },
+      {
+        OrdemId: 7,
+        CodCliente: 1,
+        CodAtivo: 1,
+        QtdeAtivo: 100,
+        ValorPago: 58.55,
+        Tipo: 'Venda'
+      },
+      {
+        OrdemId: 8,
+        CodCliente: 1,
+        CodAtivo: 2,
+        QtdeAtivo: 100,
+        ValorPago: 58.55,
+        Tipo: 'Venda'
+      },
+      {
+        OrdemId: 9,
+        CodCliente: 1,
+        CodAtivo: 2,
+        QtdeAtivo: 500,
         ValorPago: 58.55,
         Tipo: 'Compra'
       },
