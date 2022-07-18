@@ -13,38 +13,34 @@ const getClientPortfolio = async (clientId: number): Promise<any> => {
     const { CodCliente, CodAtivo, Ativo: { Valor } } = compra
     if (venda) {
       const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
-      const object = {
+      const portfolio = {
         CodCliente,
         CodAtivo,
         QtdeAtivo,
         Valor
       }
-      return object
+      return portfolio
     }
-    const object = {
+    const portfolio = {
       CodCliente,
       CodAtivo,
       QtdeAtivo: compra.QtdeAtivo,
       Valor
     }
-    return object
+    
+    return portfolio
   }
   )
-
   return clientPortfolio;
 }
 
-
-
-
-
-const getAsset = async (assetId: number) => {
-  const asset = await Ativo.findByPk(assetId)
+const getAsset = (assetId: number): Promise<any>[] => {
+  const asset: Promise<any>[] = Ativo.findByPk(assetId)
   return asset;
 }
 
-const getAll = async () => {
-  const asset = await Ativo.findAll()
+const getAll = (): Promise<any>[]  => {
+  const asset: Promise<any>[] = Ativo.findAll()
   return asset;
 }
 
