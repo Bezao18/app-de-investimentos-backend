@@ -1,8 +1,6 @@
 interface IClient {
   CodCliente: number,
-  CodAtivo: number,
-  QtdeAtivo: number,
-  Valor: number
+  Saldo: number
 }
 
 export default IClient;
