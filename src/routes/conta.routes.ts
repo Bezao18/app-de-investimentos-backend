@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getClientAccount, withdrawFromAccount } from '../controllers/conta.controller'
+import { depositIntoAccount, getClientAccount, withdrawFromAccount } from '../controllers/conta.controller'
 
 const contaRoutes = Router();
 
-contaRoutes.post('/deposito', () => { console.log('Rota funcionando') });
+contaRoutes.post('/deposito', depositIntoAccount);
 
 contaRoutes.post('/saque', withdrawFromAccount);
 

@@ -20,3 +20,12 @@ export const withdrawRequest = async (transactionInfo:any) => {
   await Cliente.update({Saldo: SaldoAtual}, {where:{CodCliente}})
   return `Saque de R$${Valor} feito com sucesso`
 }
+
+export const depositRequest = (transactionInfo:any) => {
+  const {CodCliente, Valor} = transactionInfo;
+  if(Number(Valor) <= 0) {
+    throw new HTTPErrorMessage(400, `Não é possível depositar um valor negativo ou igual a zero`)
+  }
+  Cliente.increment({Saldo: Valor}, {where:{CodCliente}})
+  return `Depósito de R$${Valor} feito com sucesso`
+}
