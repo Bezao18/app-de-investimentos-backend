@@ -44,7 +44,8 @@ const getAsset = async (assetId: number) => {
 }
 
 const getAll = async () => {
-
+  const asset = await Ativo.findAll()
+  return asset;
 }
 
 export { getAll, getAsset, getClientPortfolio }

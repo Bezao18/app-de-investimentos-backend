@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAsset, getClientPortfolio } from '../services/ativos.service';
+import { getAll, getAsset, getClientPortfolio } from '../services/ativos.service';
 
 const getByParameter = async (req: Request, res: Response) => {
   const { cliente, ativo } = req.query;
@@ -8,9 +8,9 @@ const getByParameter = async (req: Request, res: Response) => {
     return res.status(200).json(clientPortfolio)
   } if (ativo) {
     const asset = await getAsset(Number(ativo));
-    return res.status(418).json(asset)
-  }     /* const object = await getAll();
-  return res.status(418).json('PESQUISA GERAL') */
+    return res.status(200).json(asset)
+  } const assets = await getAll();
+  return res.status(200).json(assets)
 }
 
 export default { getByParameter };
