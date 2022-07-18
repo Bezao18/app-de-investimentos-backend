@@ -75,6 +75,15 @@ module.exports = {
         ValorPago: 58.55,
         Tipo: 'Compra'
       },
+      {
+        OrdemId: 10,
+        CodCliente: 1,
+        CodAtivo: 3,
+        QtdeAtivo: 600,
+        ValorPago: 58.55,
+        Tipo: 'Compra'
+      },
+      
       ], { timestamps: false });
   },
 

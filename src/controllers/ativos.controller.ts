@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { /* getByAsset, getAll, */ getByClient } from '../services/ativos.service';
+import { /* getByAsset, getAll, */ getClientPortfolio } from '../services/ativos.service';
 
 const getByParameter = async (req: Request, res: Response) => {
   const { cliente, ativo } = req.query;
   if (cliente) {
-    const object = await getByClient(Number(cliente));
-    return res.status(418).json(object)
+    const clientPortfolio = await getClientPortfolio(Number(cliente));
+    return res.status(200).json(clientPortfolio)
   } /* if (ativo) {
-    const object = await getByAsset(ativo);
+    const object = await getByAsset(ativo).;
     return res.status(418).json('PESQUISA POR ATIVO')
   }     const object = await getAll();
   return res.status(418).json('PESQUISA GERAL') */

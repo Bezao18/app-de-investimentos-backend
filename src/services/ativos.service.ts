@@ -1,43 +1,17 @@
 import sequelize from 'sequelize';
 import IClient from '../interfaces/IClient'
-const { Ordem, Cliente, Ativo } = require('../database/models')
+import IOrder from '../interfaces/IOrder';
+import getClientsOrders from '../utils/getClientsOrders';
 
-const getByClient = async (clientId: number): Promise<any> => {
-  const clientsBuyOrders: any[] = await Ordem.findAll({
-    include: [
-      { model: Ativo, as: 'Ativo', attributes: ['Valor']},
-    ],
-    group: ['Ordem.CodAtivo', 'Ativo.CodAtivo', 'CodCliente', 'Tipo'],
-    having: { CodCliente: clientId, Tipo: 'Compra' },
-    attributes: [
-      'CodCliente', 'CodAtivo',
-      [sequelize.fn("SUM", sequelize.col('Ordem.QtdeAtivo')), 'QtdeAtivo']
-      ,'Tipo'
-    ],
-    order: ['CodAtivo']
-  }
-  );
+const getClientPortfolio = async (clientId: number): Promise<any> => {
+  const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
+  const sellOrders: IOrder[] = await  getClientsOrders(clientId, 'Venda');
 
-  const clientsSellOrders: any[] = await Ordem.findAll({
-    include: [
-      { model: Ativo, as: 'Ativo', attributes: ['Valor']}, // Esse valor representa a cotação atual
-    ],
-    group: ['Ordem.CodAtivo', 'Ativo.CodAtivo', 'CodCliente', 'Tipo'],
-    having: { CodCliente: clientId, Tipo: 'Venda' },
-    attributes: [
-      'CodCliente', 'CodAtivo',
-      [sequelize.fn("SUM", sequelize.col('Ordem.QtdeAtivo')), 'QtdeAtivo']
-      ,'Tipo'
-    ],
-    order: ['CodAtivo']
-  }
-  );
-
-  const test = clientsBuyOrders.map((compra, i) => {
-    const venda = clientsSellOrders[i]
-    if (venda.CodAtivo === compra.CodAtivo) {
+  const clientPortfolio = buyOrders.map((compra: any, i: number) => {
+    const venda = sellOrders[i]
+    const { CodCliente, CodAtivo, Ativo: {Valor} } = compra
+    if (venda) {
       const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
-      const { CodCliente, CodAtivo, Ativo: {Valor} } = compra
       const object = {
         CodCliente,
         CodAtivo,
@@ -46,10 +20,17 @@ const getByClient = async (clientId: number): Promise<any> => {
       }
       return  object
     }
+    const object = {
+      CodCliente,
+      CodAtivo,
+      QtdeAtivo: compra.QtdeAtivo,
+      Valor
+    } 
+    return object
   }
   )
 
-  return test;
+  return clientPortfolio;
 }
 
 
@@ -64,4 +45,4 @@ const getByClient = async (clientId: number): Promise<any> => {
 
 // }
 
-export { /* getAll, getByAsset, */ getByClient }
+export { /* getAll, getByAsset, */ getClientPortfolio }
