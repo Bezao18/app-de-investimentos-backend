@@ -10,30 +10,33 @@ const getClientPortfolio = async (clientId: number): Promise<any> => {
   }
   const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
   const sellOrders: IOrder[] = await getClientsOrders(clientId, 'Venda');
-
-  const clientPortfolio = buyOrders.map((compra: IOrder, i: number) => {
+  let i: number = 0; 
+  const clientPortfolio = buyOrders.map((compra: IOrder) => {
     const venda: IOrder = sellOrders[i]
     const { CodCliente, CodAtivo, Ativo: { Valor } } = compra
-    if (venda) {
-      const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
-      const portfolio: IPortfolio = {
+    if (!venda || venda.CodAtivo !== CodAtivo) { /* Caso o array de vendas seja menor ou esse ativo não foi vendido é retornado a qtde comprada */
+      const portfolio = {
         CodCliente,
         CodAtivo,
-        QtdeAtivo,
+        QtdeAtivo: Number(compra.QtdeAtivo),
         Valor
       }
       return portfolio
+    } if (venda.CodAtivo === CodAtivo) { /* Caso esse ativo tenha sido vendido pelo cliente é calculado*/
+      const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
+      if (QtdeAtivo !== 0) {
+        const portfolio: IPortfolio = {
+          CodCliente,
+          CodAtivo,
+          QtdeAtivo,
+          Valor
+        }
+        i += 1 /* Contador só soma uma posição quando o ativo vendido e comprado são mesmo porque o array de vendas pode ser menor que o de compras */
+        return portfolio
+      }
     }
-    const portfolio: IPortfolio = {
-      CodCliente,
-      CodAtivo,
-      QtdeAtivo: compra.QtdeAtivo,
-      Valor
-    }
-
-    return portfolio
   }
-  )
+  ).filter((asset) => asset) /* Remove nulls causados por ativos com qtde 0 */
   return clientPortfolio;
 }
 

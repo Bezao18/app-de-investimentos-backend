@@ -23,6 +23,11 @@ module.exports = {
       Valor: 24.6,
       QtdeAtivo:15500,
     },
+    {
+      CodAtivo: 5,
+      Valor: 24.6,
+      QtdeAtivo:100,
+    },
     ], { timestamps: false });
   },
 
