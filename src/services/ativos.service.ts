@@ -10,30 +10,32 @@ const getClientPortfolio = async (clientId: number): Promise<any> => {
   }
   const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
   const sellOrders: IOrder[] = await getClientsOrders(clientId, 'Venda');
-  let i: number = 0; 
+  let i: number = 0;
   const clientPortfolio = buyOrders.map((compra: IOrder) => {
     const venda: IOrder = sellOrders[i]
     const { CodCliente, CodAtivo, Ativo: { Valor } } = compra
-    if (!venda || venda.CodAtivo !== CodAtivo) { /* Caso o array de vendas seja menor ou esse ativo não foi vendido é retornado a qtde comprada */
-      const portfolio = {
-        CodCliente,
-        CodAtivo,
-        QtdeAtivo: Number(compra.QtdeAtivo),
-        Valor
-      }
-      return portfolio
-    } if (venda.CodAtivo === CodAtivo) { /* Caso esse ativo tenha sido vendido pelo cliente é calculado*/
+    if (venda && venda.CodAtivo === CodAtivo) { /* Caso esse ativo tenha sido vendido pelo cliente é calculado*/
       const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
       if (QtdeAtivo !== 0) {
-        const portfolio: IPortfolio = {
+        const portfolio = {
           CodCliente,
           CodAtivo,
           QtdeAtivo,
           Valor
         }
-        i += 1 /* Contador só soma uma posição quando o ativo vendido e comprado são mesmo porque o array de vendas pode ser menor que o de compras */
+        i += 1
         return portfolio
       }
+      i += 1 /* Caso a qtd do ativo seja 0, o array de vendas apenas retorna null e pula para a próxima posição */
+    } 
+    else { /* Caso nessa posição do array de vendas o ativo vendido seja diferente ativo comprado ou essa posição não tenha uma venda*/
+      const portfolio = { 
+        CodCliente,
+        CodAtivo,
+        QtdeAtivo: Number(compra.QtdeAtivo), /* fica implícito que esse ativo comprado nunca foi vendido e por isso a qtde compra é a qtde final */
+        Valor
+      }
+      return portfolio
     }
   }
   ).filter((asset) => asset) /* Remove nulls causados por ativos com qtde 0 */

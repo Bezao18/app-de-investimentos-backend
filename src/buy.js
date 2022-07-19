@@ -28,6 +28,15 @@
   },
   {
       "CodCliente": 1,
+      "CodAtivo": 4,
+      "QtdeAtivo": "40",
+      "Tipo": "Compra",
+      "Ativo": {
+          "Valor": 24.6
+      }
+  },
+  {
+      "CodCliente": 1,
       "CodAtivo": 5,
       "QtdeAtivo": "100",
       "Tipo": "Compra",
