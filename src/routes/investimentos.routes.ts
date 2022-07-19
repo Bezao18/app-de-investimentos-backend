@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import {sendBuyOrder, sendSellOrder} from '../controllers/investimentos.controller';
+import validateOrder from '../middlewares/validateOrder';
+import { sendBuyOrder, sendSellOrder } from '../controllers/investimentos.controller';
 
 const investimentosRoutes = Router();
 
-investimentosRoutes.post('/comprar', sendBuyOrder);
+investimentosRoutes.post('/comprar', validateOrder, sendBuyOrder);
 
-investimentosRoutes.post('/vender', sendSellOrder);
+investimentosRoutes.post('/vender', validateOrder, sendSellOrder);
 
 export default investimentosRoutes

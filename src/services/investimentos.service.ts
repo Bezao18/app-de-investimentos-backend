@@ -5,6 +5,9 @@ const { Ativo, Cliente, Ordem } = require('../database/models');
 
 export const newBuyOrder = async (buyOrder: IOrder) => {
   const { CodCliente, CodAtivo, QtdeAtivo }: IOrder = buyOrder;
+  if (QtdeAtivo <= 0) {
+    throw new HTTPErrorMessage(400, 'Não é possivel comprar uma quantidade negativa ou igual a zero')
+  }
   const asset = await Ativo.findByPk(CodAtivo, { attributes: ['Valor', 'QtdeAtivo'] })
   const { Saldo } = await Cliente.findByPk(CodCliente, { attributes: ['Saldo'] })
   if (Saldo < (asset.Valor * QtdeAtivo)) {
@@ -13,20 +16,23 @@ export const newBuyOrder = async (buyOrder: IOrder) => {
     throw new HTTPErrorMessage(400, 'Quantidade de ativos indisponível')
   }
   Ordem.create({ CodCliente, CodAtivo, ValorPago: asset.Valor, QtdeAtivo, Tipo: 'Compra' })
-  Ativo.decrement({QtdeAtivo}, {where: CodAtivo})
+  Ativo.decrement({ QtdeAtivo }, { where: CodAtivo })
   Cliente.decrement({ Saldo: (asset.Valor * QtdeAtivo) }, { where: { CodCliente } })
   return 'Ordem de compra executada com sucesso'
 }
 
 export const newSellOrder = async (sellOrder: IOrder) => {
   const { CodCliente, CodAtivo, QtdeAtivo }: IOrder = sellOrder;
+  if (QtdeAtivo <= 0) {
+    throw new HTTPErrorMessage(400, 'Não é possivel vender uma quantidade negativa ou igual a zero')
+  }
   const asset = await Ativo.findByPk(CodAtivo, { attributes: ['Valor', 'QtdeAtivo'] })
   const client = await getClientPortfolio(CodCliente)
-  if(client.QtdeAtivo < QtdeAtivo) {
+  if (client.QtdeAtivo < QtdeAtivo) {
     throw new HTTPErrorMessage(400, 'Ativos suficientes para essa operação')
   }
   Ordem.create({ CodCliente, CodAtivo, ValorPago: asset.Valor, QtdeAtivo, Tipo: 'Venda' })
-  Ativo.increment({QtdeAtivo}, {where: CodAtivo})
+  Ativo.increment({ QtdeAtivo }, { where: CodAtivo })
   Cliente.increment({ Saldo: (asset.Valor * QtdeAtivo) }, { where: { CodCliente } })
   return 'Ordem de venda executada com sucesso'
 }
