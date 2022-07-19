@@ -1,4 +1,4 @@
-import {IAtivo, IOrder} from '../interfaces'
+import { IAtivo, IOrder, IPortfolio } from '../interfaces'
 const { Ativo, Cliente } = require('../database/models');
 import getClientsOrders from '../utils/getClientsOrders';
 import HTTPErrorMessage from '../utils/HTTPErrorMessage';
@@ -16,7 +16,7 @@ const getClientPortfolio = async (clientId: number): Promise<any> => {
     const { CodCliente, CodAtivo, Ativo: { Valor } } = compra
     if (venda) {
       const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
-      const portfolio = {
+      const portfolio: IPortfolio = {
         CodCliente,
         CodAtivo,
         QtdeAtivo,
@@ -24,7 +24,7 @@ const getClientPortfolio = async (clientId: number): Promise<any> => {
       }
       return portfolio
     }
-    const portfolio = {
+    const portfolio: IPortfolio = {
       CodCliente,
       CodAtivo,
       QtdeAtivo: compra.QtdeAtivo,
