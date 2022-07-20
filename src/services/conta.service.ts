@@ -1,6 +1,5 @@
 import HTTPErrorMessage from "../utils/HTTPErrorMessage";
 import {ITransaction} from '../interfaces'
-
 const { Cliente } = require('../database/models')
 
 export const getClientInfo = async (clientId: number) => {
