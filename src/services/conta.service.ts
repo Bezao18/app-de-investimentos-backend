@@ -3,7 +3,7 @@ import {ITransaction} from '../interfaces'
 const { Cliente } = require('../database/models')
 
 export const getClientInfo = async (clientId: number) => {
-  const clientInfo = await Cliente.findByPk(clientId);
+  const clientInfo = await Cliente.findByPk(clientId, {attributes:{exclude:['Senha']}});
   if(!clientInfo) {
     throw new HTTPErrorMessage(404, 'Esse cliente não existe')
   }

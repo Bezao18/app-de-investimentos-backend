@@ -6,22 +6,22 @@ module.exports = {
       [
         {
           Email: 'silviosantos@email.com',
-          Senha: "$2a$05$XYb/Ljb59dpQOVWFt6LaoO8XOuOHQFqh8Jv4gYwCNJpPrx..kUjo2",
+          Senha: "$2a$05$sklaf2Otch48tRK2jDkMuO21Vc8D9JILTQrfKQe2FQQ0VuvzrOqn.",
           Saldo: 25688000.12,
         },
         {
           Email: 'fulano@email.com',
-          Senha: "$2a$05$ZGx53R1I824IE6NYs05lwOgpEGe1W6gvEaVZI.cUhfikiVKhf8O0e",
+          Senha: "$2a$05$23uBUzzIczc8fuyBAoQc0eNtjIcZ4dgIVGV0yvCxt90Lntd/PrMf2",
           Saldo: 15484.55,
         },
         {
           Email: 'jorgin@email.com',
-          Senha: "$2a$05$TPgPMDSDrG2zGaNhPBkck.W5v3xk9rJpwJgQfwMRk3a9jeUWYdV..",
+          Senha: "$2a$05$BpIgYCEWt2u3I/qoXtcPdOPjTOUIe9CgdcKs15PGMMSd1Xfa3qSuS",
           Saldo: 1481.33,
         },
         {
           Email: 'loremipsum@email.com',
-          Senha: "$2a$05$KNK6HZTTZy/4b233HmKiyOyspQGv4DTtqxN0UaESH3Kv4Ie80iImK",
+          Senha: "$2a$05$PV0G6Ofcuv3AaRiqALi.0eRRqI96m5mqIoSf8E/yZhlq/3QSDDybK",
           Saldo: 150357.25,
         },
       ], { timestamps: false });
