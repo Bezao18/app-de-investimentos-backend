@@ -8,7 +8,7 @@ const calculateClientPortfolio = ({ buyOrders, sellOrders }: IOrderHistory): IPo
     if (venda && venda.CodAtivo === CodAtivo) { /* Caso esse ativo tenha sido vendido pelo cliente é calculado a diferença entre compra e venda*/
       const QtdeAtivo = compra.QtdeAtivo - venda.QtdeAtivo
       if (QtdeAtivo === 0) { i += 1 } /* Caso a qtd do ativo seja 0, o array de vendas apenas retorna null e pula para a próxima posição */
-      i += 1 
+      i += 1
       return { CodCliente, CodAtivo, QtdeAtivo, Valor } as IPortfolio
     }
     else { /* Caso nessa posição do array de vendas o CodAtivo seja diferente do CodAtivo comprado ou essa posição não tenha uma venda*/

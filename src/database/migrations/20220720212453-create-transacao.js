@@ -1,14 +1,14 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Ordems', {
-      OrdemId: {
+    await queryInterface.createTable('Transacaos', {
+      TransacaoId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      CodCliente: {
+      CodCliente:{
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
@@ -16,19 +16,7 @@ module.exports = {
           key: 'CodCliente'
         }
       },
-      CodAtivo: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Ativos',
-          key: 'CodAtivo'
-        }
-      },
-      QtdeAtivo: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      ValorDaOrdem: {
+      Valor:{
         allowNull: false,
         type: Sequelize.FLOAT
       },
@@ -36,7 +24,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      Horário: {
+      Horario: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now')
@@ -44,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Ordems');
+    await queryInterface.dropTable('transacaos');
   }
 };

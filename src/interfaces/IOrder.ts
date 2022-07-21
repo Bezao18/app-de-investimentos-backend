@@ -5,7 +5,7 @@ interface IOrder {
   CodCliente: number;
   CodAtivo: number;
   QtdeAtivo: number;
-  ValorPago?: number;
+  ValorDaOrdem?: number;
   Tipo?:string;
   Horário?: Date,
   Ativo: IAtivo;

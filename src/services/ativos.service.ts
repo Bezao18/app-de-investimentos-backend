@@ -5,15 +5,10 @@ import getClientsOrders from '../utils/getClientsOrders';
 import HTTPErrorMessage from '../utils/HTTPErrorMessage';
 
 const getClientPortfolio = async (clientId: number): Promise<IPortfolio[]> => {
-  const client: Promise<any> = await Cliente.findByPk(clientId, { attributes: ['CodCliente'] })
-  if (!client) {
-    throw new HTTPErrorMessage(404, 'Esse cliente não existe')
-  }
   const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
   const sellOrders: IOrder[] = await getClientsOrders(clientId, 'Venda');
-  let i: number = 0;
   if (!buyOrders) {
-    throw new HTTPErrorMessage(404, 'Cliente não possui nenhum ativo')
+    throw new HTTPErrorMessage(404, 'O cliente não possui nenhum ativo')
   }
   const clientPortfolio = calculateClientPortfolio({buyOrders, sellOrders})
   return clientPortfolio as IPortfolio[];

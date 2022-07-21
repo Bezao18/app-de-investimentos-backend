@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     CodCliente: DataTypes.INTEGER,
     CodAtivo: DataTypes.INTEGER,
     QtdeAtivo: DataTypes.INTEGER,
-    ValorPago: DataTypes.FLOAT,
+    ValorDaOrdem: DataTypes.FLOAT,
     Tipo: DataTypes.STRING,
     Horário: DataTypes.DATE,
   }, { timestamps: false });

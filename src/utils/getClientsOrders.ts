@@ -9,11 +9,7 @@ const getClientsOrders = (clientId: number, compraOuVenda: string): Promise<IOrd
     ],
     group: ['Ordem.CodAtivo', 'Ativo.CodAtivo', 'CodCliente', 'Tipo'],
     having: { CodCliente: clientId, Tipo: compraOuVenda },
-    attributes: [
-      'CodCliente', 'CodAtivo',
-      [sequelize.fn("SUM", sequelize.col('Ordem.QtdeAtivo')), 'QtdeAtivo']
-      , 'Tipo'
-    ],
+    attributes: ['CodCliente', 'CodAtivo', [sequelize.fn("SUM", sequelize.col('Ordem.QtdeAtivo')), 'QtdeAtivo'], 'Tipo'],
     order: ['CodAtivo']
   }
   );

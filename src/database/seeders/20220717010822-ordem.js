@@ -4,83 +4,66 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Ordems',
       [{
-        OrdemId: 1,
         CodCliente: 1,
         CodAtivo: 1,
         QtdeAtivo: 200,
-        ValorPago: 50.53,
+        ValorDaOrdem: 50.53,
         Tipo: 'Compra'
       },
       {
-        OrdemId: 2,
         CodCliente: 1,
         CodAtivo: 2,
         QtdeAtivo: 200,
-        ValorPago: 68.55,
+        ValorDaOrdem: 68.55,
         Tipo: 'Compra'
       },
       {
-        OrdemId: 3,
         CodCliente: 2,
         CodAtivo: 4,
         QtdeAtivo: 500,
-        ValorPago: 80.42,
+        ValorDaOrdem: 80.42,
         Tipo: 'Compra'
       },
       {
-        OrdemId: 4,
         CodCliente: 3,
         CodAtivo: 3,
         QtdeAtivo: 1000,
-        ValorPago: 17.55,
+        ValorDaOrdem: 17.55,
         Tipo: 'Compra'
       }, 
       {
-        OrdemId: 5,
         CodCliente: 1,
         CodAtivo: 1,
         QtdeAtivo: 400,
-        ValorPago: 58.55,
+        ValorDaOrdem: 58.55,
         Tipo: 'Compra'
       },
       {
-        OrdemId: 6,
-        CodCliente: 1,
-        CodAtivo: 1,
-        QtdeAtivo: 400,
-        ValorPago: 58.55,
-        Tipo: 'Venda'
-      },
-      {
-        OrdemId: 7,
         CodCliente: 1,
         CodAtivo: 1,
         QtdeAtivo: 100,
-        ValorPago: 58.55,
+        ValorDaOrdem: 58.55,
         Tipo: 'Venda'
       },
       {
-        OrdemId: 8,
         CodCliente: 1,
         CodAtivo: 2,
         QtdeAtivo: 100,
-        ValorPago: 58.55,
+        ValorDaOrdem: 58.55,
         Tipo: 'Venda'
       },
       {
-        OrdemId: 9,
         CodCliente: 1,
         CodAtivo: 2,
         QtdeAtivo: 500,
-        ValorPago: 58.55,
+        ValorDaOrdem: 58.55,
         Tipo: 'Compra'
       },
       {
-        OrdemId: 10,
         CodCliente: 1,
         CodAtivo: 3,
         QtdeAtivo: 600,
-        ValorPago: 58.55,
+        ValorDaOrdem: 58.55,
         Tipo: 'Compra'
       },
       
