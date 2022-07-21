@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
+    Email: DataTypes.STRING,
+    Senha: DataTypes.STRING,
     Saldo: DataTypes.FLOAT,
   }, { timestamps: false });
 

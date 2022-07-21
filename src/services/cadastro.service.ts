@@ -4,16 +4,16 @@ import bcrypt from 'bcrypt-nodejs';
 import HTTPErrorMessage from "../utils/HTTPErrorMessage";
 import { createToken } from "../utils/JWT";
 
-const createClient = (client: IClient): any => {
-  const clientExists = Cliente.findAll({ where: { Email: client.Email } })
-  if (!clientExists) {
-    const salt = bcrypt.genSaltSync(5);
-    const Senha = bcrypt.hashSync(client.Senha as string, salt);
-    Cliente.create({ Email: client.Email, Senha })
-    const token = {token: createToken(client)}
-    return token
+const createClient = async (client: IClient): Promise<any> => {
+  const clientExists = await Cliente.findOne({ where: { Email: client.Email } })
+  if (clientExists) {
+    throw new HTTPErrorMessage(409, 'Já existe um cliente com esse Email')
   }
-  throw new HTTPErrorMessage(409, 'Já existe um cliente com esse Email')
+  const salt = bcrypt.genSaltSync(5);
+  const Senha = bcrypt.hashSync(client.Senha as string, salt);
+  Cliente.create({ Email: client.Email, Senha, Saldo: 0 })
+  const token = {token: createToken(client)}
+  return token
 }
 
 export default createClient

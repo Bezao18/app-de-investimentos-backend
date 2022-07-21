@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      Email:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      Senha:{
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       Saldo: {
         allowNull: false,
         type: Sequelize.FLOAT
