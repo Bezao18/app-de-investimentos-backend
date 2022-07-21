@@ -18,7 +18,7 @@ export const createToken = ({ Email }: Omit<any, 'Senha'>): string | HTTPErrorMe
   return token;
 };
 
-export const validateToken = (token: string): JwtPayload => {
+export const validateJWT = (token: string): JwtPayload => {
   try {
     const decodedToken = verify(token, secret);
     return decodedToken as JwtPayload;

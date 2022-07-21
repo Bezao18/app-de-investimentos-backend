@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { depositIntoAccount, getClientAccount, withdrawFromAccount } from '../controllers/conta.controller';
 import validateTransaction from '../middlewares/validateTransaction';
 import checkClient from '../middlewares/checkClient';
+import validateToken from '../middlewares/validateToken';
 
 const contaRoutes = Router();
 

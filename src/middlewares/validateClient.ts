@@ -1,7 +1,5 @@
 import HTTPErrorMessage from "../utils/HTTPErrorMessage";
 import { Request, Response, NextFunction } from "express";
-const { Cliente } = require('../database/models');
-
 
 const validateClient = async (req: Request, res: Response, next: NextFunction) => {
   const { Email, Senha } = req.body;
