@@ -1,6 +1,8 @@
 interface IClient {
-  CodCliente: number,
-  Saldo: number
+  CodCliente?: number;
+  Email?: string;
+  Senha?: string | number;
+  Saldo?: number;
 }
 
 export default IClient;

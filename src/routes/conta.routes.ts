@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { depositIntoAccount, getClientAccount, withdrawFromAccount } from '../controllers/conta.controller';
 import validateTransaction from '../middlewares/validateTransaction';
-import validateClient from '../middlewares/validateClient';
+import checkClient from '../middlewares/checkClient';
 
 const contaRoutes = Router();
 
-contaRoutes.post('/deposito', validateTransaction, validateClient, depositIntoAccount);
+contaRoutes.post('/deposito', validateTransaction, checkClient, depositIntoAccount);
 
-contaRoutes.post('/saque', validateTransaction, validateClient, withdrawFromAccount);
+contaRoutes.post('/saque', validateTransaction, checkClient, withdrawFromAccount);
 
 contaRoutes.get('/:CodCliente', getClientAccount);
 

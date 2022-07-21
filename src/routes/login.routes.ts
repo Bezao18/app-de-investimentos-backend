@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { sendBuyOrder, sendSellOrder } from '../controllers/investimentos.controller';
-import validateClient from '../middlewares/validateClient';
+import checkClient from '../middlewares/checkClient';
 
 
 const loginRoutes = Router();
 
-loginRoutes.post('/', validateClient, sendBuyOrder);
+loginRoutes.post('/', checkClient, sendBuyOrder);
 
 export default loginRoutes

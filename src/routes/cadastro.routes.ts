@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { sendBuyOrder, sendSellOrder } from '../controllers/investimentos.controller';
+import newClientAccount from '../controllers/cadastro.controller';
 
 const cadastroRoutes = Router();
 
-cadastroRoutes.post('/', sendBuyOrder);
+cadastroRoutes.post('/', newClientAccount);
 
 export default cadastroRoutes

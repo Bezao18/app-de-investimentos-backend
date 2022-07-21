@@ -10,15 +10,15 @@ const jwtConfig: SignOptions = {
 };
 
 const secret: string | undefined = process.env.JWT_SECRET || 'é segredo po';
-const createToken = ({ CodCliente, Email }: Omit<any, 'Senha, Saldo'>): string | HTTPErrorMessage => {
+export const createToken = ({ Email }: Omit<any, 'Senha'>): string | HTTPErrorMessage => {
   if (!secret) {
     throw new HTTPErrorMessage(500, 'Variável de ambiente JWT_SECRET indefinida');
   }
-  const token = sign({ CodCliente, Email }, secret, jwtConfig);
+  const token = sign({ Email }, secret, jwtConfig);
   return token;
 };
 
-const validateToken = (token: string): JwtPayload => {
+export const validateToken = (token: string): JwtPayload => {
   try {
     const decodedToken = verify(token, secret);
     return decodedToken as JwtPayload;
@@ -26,5 +26,3 @@ const validateToken = (token: string): JwtPayload => {
     throw new HTTPErrorMessage(401, 'Token inválido');
   }
 };
-
-export default { createToken, validateToken };

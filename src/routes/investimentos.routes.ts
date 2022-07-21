@@ -2,13 +2,13 @@ import { Router } from 'express';
 import validateOrder from '../middlewares/validateOrder';
 import { sendBuyOrder, sendSellOrder } from '../controllers/investimentos.controller';
 import validateAsset from '../middlewares/validateAsset';
-import validateClient from '../middlewares/validateClient';
+import checkClient from '../middlewares/checkClient';
 
 
 const investimentosRoutes = Router();
 
-investimentosRoutes.post('/comprar', validateOrder, validateClient, validateAsset, sendBuyOrder);
+investimentosRoutes.post('/comprar', validateOrder, checkClient, validateAsset, sendBuyOrder);
 
-investimentosRoutes.post('/vender', validateOrder, validateClient, validateAsset, sendSellOrder);
+investimentosRoutes.post('/vender', validateOrder, checkClient, validateAsset, sendSellOrder);
 
 export default investimentosRoutes
