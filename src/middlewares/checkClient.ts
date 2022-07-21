@@ -1,4 +1,3 @@
-import { ITransaction } from '../interfaces'
 import HTTPErrorMessage from "../utils/HTTPErrorMessage";
 import { Request, Response, NextFunction } from "express";
 const { Cliente } = require('../database/models');
@@ -13,5 +12,4 @@ const checkClient = async (req: Request, res: Response, next: NextFunction) => {
   return next();
 }
 
-export default checkClient
-;
+export default checkClient;

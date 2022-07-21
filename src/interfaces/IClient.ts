@@ -1,7 +1,7 @@
 interface IClient {
   CodCliente?: number;
   Email?: string;
-  Senha?: string | number;
+  Senha?: string;
   Saldo?: number;
 }
 
