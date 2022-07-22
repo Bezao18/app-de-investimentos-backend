@@ -1,6 +1,7 @@
 import HTTPErrorMessage from "../utils/HTTPErrorMessage";
-import {ITransaction} from '../interfaces'
-const { Cliente } = require('../database/models')
+import getClientsOrder from '../utils/getClientsOrders';
+import {IOrder, ITransaction} from '../interfaces'
+const { Cliente, Ordem } = require('../database/models')
 
 export const getClientInfo = async (clientId: number) => {
   const clientInfo = await Cliente.findByPk(clientId, {attributes:{exclude:['Senha']}});
@@ -30,4 +31,10 @@ export const depositRequest = (transactionInfo: ITransaction): string => {
   }
   Cliente.increment({ Saldo: Valor }, { where: { CodCliente } })
   return `Depósito de R$${Valor} feito com sucesso`
+}
+
+
+export const getOrders = async (clientId: number) => {
+  const orders: IOrder[] = await Ordem.findAll({where:{CodCliente:clientId}})
+  return orders as IOrder[];
 }

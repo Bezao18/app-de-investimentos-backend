@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { depositIntoAccount, getClientAccount, withdrawFromAccount } from '../controllers/conta.controller';
+import { depositIntoAccount, getClientAccount, withdrawFromAccount, getOrdersHistory } from '../controllers/conta.controller';
 import validateTransaction from '../middlewares/validateTransaction';
 import checkClient from '../middlewares/checkClient';
 import validateToken from '../middlewares/validateToken';
@@ -11,5 +11,7 @@ contaRoutes.post('/deposito', validateTransaction, checkClient, depositIntoAccou
 contaRoutes.post('/saque', validateTransaction, checkClient, withdrawFromAccount);
 
 contaRoutes.get('/:CodCliente', getClientAccount);
+
+contaRoutes.get('/ordens/:CodCliente', getOrdersHistory)
 
 export default contaRoutes

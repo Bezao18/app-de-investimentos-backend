@@ -18,5 +18,4 @@ routes.use('/login', loginRoutes)
 routes.use('/cadastro', cadastroRoutes)
 
 
-
 export default routes

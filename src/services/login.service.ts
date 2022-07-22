@@ -4,16 +4,16 @@ const { Cliente } = require('../database/models');
 import bcrypt from 'bcrypt-nodejs';
 import { IClient } from "../interfaces";
 
-const clientLogin = async (request: IClient): Promise<string> => {
-  const client = await Cliente.findOne({ where: { Email: request.Email } })
+const clientLogin = async (clientRequest: IClient): Promise<string> => {
+  const client = await Cliente.findOne({ where: { Email: clientRequest.Email } })
   if (!client) {
     throw new HTTPErrorMessage(400, 'Dados inválidos')
   } 
-  const passwordIsValid = bcrypt.compareSync(request.Senha as string, client.Senha)
+  const passwordIsValid = bcrypt.compareSync(clientRequest.Senha as string, client.Senha)
   if(!passwordIsValid) {
     throw new HTTPErrorMessage(400, 'Dados inválidos')
   }
-  const token = createToken(request)
+  const token = createToken(clientRequest)
   return token as string;
 }
 
