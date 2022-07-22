@@ -11,10 +11,10 @@ const getClientPortfolio = async (clientId: number): Promise<IPortfolio[]> => {
   }
   const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
   const sellOrders: IOrder[] = await getClientsOrders(clientId, 'Venda');
-  if (!buyOrders) {
-    throw new HTTPErrorMessage(404, 'O cliente não possui nenhum ativo')
-  }
   const clientPortfolio = calculateClientPortfolio({buyOrders, sellOrders})
+  if(!clientPortfolio[0]) {
+    throw new HTTPErrorMessage(404, 'Esse cliente não possui nenhum ativo')
+  }
   return clientPortfolio as IPortfolio[];
 }
 

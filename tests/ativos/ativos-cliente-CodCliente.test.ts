@@ -43,6 +43,22 @@ describe('Testa a rota /ativos/cliente/:CodCliente', () => {
       expect(body.message).to.be.equal("Esse cliente não existe");
     });
   })
+
+  describe('Quando é passado o CodCliente de um cliente que não tem nenhum ativo', () => {
+    let body: HTTPErrorMessage;
+    before(async () => {
+      const response = await chai.request(app).get('/ativos/cliente/4')
+      status = response.status;
+      body = response.body;
+    })
+    it('A requisição GET para a rota retorna o status 404', () => {
+      expect(status).to.be.equal(404);
+    });
+    it('A requisição GET para a rota retorna a mensagem "Esse cliente não possui nenhum ativo"', () => {
+      expect(body.message).to.be.equal("Esse cliente não possui nenhum ativo");
+    });
+  })
+
   describe('Quando é passado um parâmetro que não é um número', () => {
     let body: HTTPErrorMessage;
     before(async () => {
