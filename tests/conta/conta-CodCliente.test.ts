@@ -9,12 +9,12 @@ import HTTPErrorMessage from '../../src/utils/HTTPErrorMessage';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testa a rota /ativos/:CodAtivo', () => {
+describe('Testa a rota /conta/:CodCliente', () => {
   let body: IAtivo;
   let status: number;
-  describe('Quando é passado o CodAtivo de um ativo existente', () => {
+  describe('Quando é passado o CodCliente de um cliente existente', () => {
     before(async () => {
-      const response = await chai.request(app).get('/ativos/1')
+      const response = await chai.request(app).get('/conta/1')
       status = response.status;
       body = response.body;
     })
@@ -24,29 +24,29 @@ describe('Testa a rota /ativos/:CodAtivo', () => {
     it('A requisição GET para a rota retorna um objeto', () => {
       expect(body).to.be.an('object');
     });
-    it('O objeto retornado possui as chaves "CodAtivo", "QtdeAtivo" e "Valor"', () => {
-      expect(body).to.include.all.keys("CodAtivo", "QtdeAtivo", "Valor");
+    it('O objeto retornado possui apenas as chaves "CodCliente", "Email" e "Saldo"', () => {
+      expect(body).to.include.all.keys("CodCliente", "Email", "Saldo");
     });
   })
-  describe('Quando é passado o CodAtivo de um ativo que não existe', () => {
+  describe('Quando é passado o CodCliente de um cliente que não existe', () => {
     let body: HTTPErrorMessage;
     before(async () => {
-      const response = await chai.request(app).get('/ativos/200')
+      const response = await chai.request(app).get('/conta/200')
       status = response.status;
       body = response.body;
     })
     it('A requisição GET para a rota retorna o status 404', () => {
       expect(status).to.be.equal(404);
     });
-    it('A requisição GET para a rota retorna a mensagem "Esse ativo não existe"', () => {
-      expect(body.message).to.be.equal("Esse ativo não existe");
+    it('A requisição GET para a rota retorna a mensagem "Esse cliente não existe"', () => {
+      expect(body.message).to.be.equal("Esse cliente não existe");
     });
   })
 
   describe('Quando é passado um parâmetro que não é um número', () => {
     let body: HTTPErrorMessage;
     before(async () => {
-      const response = await chai.request(app).get('/ativos/teste')
+      const response = await chai.request(app).get('/conta/teste')
       status = response.status;
       body = response.body;
     })
