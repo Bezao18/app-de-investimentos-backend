@@ -37,7 +37,14 @@ export const depositRequest = (transactionInfo: ITransaction): string => {
 
 
 export const getOrders = async (clientId: number) => {
+  const client = await Cliente.findByPk(clientId, {attributes:['CodCliente']})
+  if(!client) {
+    throw new HTTPErrorMessage(404, 'Esse cliente não existe')
+  }
   const orders: IOrder[] = await Ordem.findAll({where:{CodCliente:clientId}})
+  if(!orders[0]) {
+    throw new HTTPErrorMessage(404, 'Esse cliente não realizou nenhuma ordem')
+  }
   return orders;
 }
 
