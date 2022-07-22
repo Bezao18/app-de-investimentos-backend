@@ -16,10 +16,13 @@ describe('Testa a rota /ativos', () => {
     status = response.status;
     body = response.body;
   })
+  it('A requisição GET para a rota retorna o status 200', async () => {
+    expect(status).to.be.equal(200);
+  });
   it('A requisição GET para a rota retorna um array de objetos', async () => {
     expect(body).to.be.an('array');    
   });
-  it('A requisição GET para a rota retorna o status 200', async () => {
-    expect(status).to.be.equal(200);
+  it('Os objetos retornados no array possuem as chaves "CodAtivo", "QtdeAtivo" e "Valor"', async () => {
+    expect(body[0]).to.include.all.keys("CodAtivo", "QtdeAtivo", "Valor");
   });
 })
