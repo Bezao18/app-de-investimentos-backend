@@ -1,6 +1,5 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http';
-import { Response } from 'express';
 import { before } from 'mocha';
 import app from '../../src/app';
 import { IAtivo } from '../../src/interfaces';
@@ -10,8 +9,17 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Testa a rota /ativos', () => {
+  let body: IAtivo[];
+  let status: number;
+  before(async () => {
+    const response = await chai.request(app).get('/ativos')
+    status = response.status;
+    body = response.body;
+  })
   it('A requisição GET para a rota retorna um array de objetos', async () => {
-    const { body, status } = await chai.request(app).get('/ativos')
-    expect(body).to.be.an('array');
+    expect(body).to.be.an('array');    
+  });
+  it('A requisição GET para a rota retorna o status 200', async () => {
+    expect(status).to.be.equal(200);
   });
 })
