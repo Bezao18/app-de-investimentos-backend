@@ -18,13 +18,13 @@ module.exports = {
       },
       Valor:{
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT(20,2),
       },
       Tipo: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      Horario: {
+      Horário: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now')

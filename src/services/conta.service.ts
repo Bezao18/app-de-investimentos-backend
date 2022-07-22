@@ -38,5 +38,10 @@ export const depositRequest = (transactionInfo: ITransaction): string => {
 
 export const getOrders = async (clientId: number) => {
   const orders: IOrder[] = await Ordem.findAll({where:{CodCliente:clientId}})
-  return orders as IOrder[];
+  return orders;
+}
+
+export const getTransactions = async (clientId: number) => {
+  const transactions: ITransaction[] = await Transacao.findAll({where:{CodCliente:clientId}})
+  return transactions;
 }

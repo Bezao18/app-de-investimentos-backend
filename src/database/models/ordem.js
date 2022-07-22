@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     CodCliente: DataTypes.INTEGER,
     CodAtivo: DataTypes.INTEGER,
     QtdeAtivo: DataTypes.INTEGER,
-    ValorDaOrdem: DataTypes.FLOAT,
+    ValorDaOrdem: DataTypes.FLOAT(20,2),
     Tipo: DataTypes.STRING,
     Horário: DataTypes.DATE,
   }, { timestamps: false });

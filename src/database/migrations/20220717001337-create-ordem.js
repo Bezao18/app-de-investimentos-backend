@@ -30,7 +30,7 @@ module.exports = {
       },
       ValorDaOrdem: {
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT(20,2),
       },
       Tipo: {
         allowNull: false,

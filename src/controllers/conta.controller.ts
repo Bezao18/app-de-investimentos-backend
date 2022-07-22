@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {IClient, IOrder, ITransaction} from '../interfaces'
-import { getClientInfo, withdrawRequest, depositRequest, getOrders } from '../services/conta.service';
+import { getClientInfo, withdrawRequest, depositRequest, getOrders, getTransactions } from '../services/conta.service';
 
 export const getClientAccount = async (req: Request, res: Response) => {
   const { CodCliente } = req.params;
@@ -23,5 +23,11 @@ export const depositIntoAccount = async (req: Request, res: Response) => {
 export const getOrdersHistory = async (req: Request, res: Response) => {
   const { CodCliente } = req.params;
   const response: IOrder[] = await getOrders(Number(CodCliente));
+  return res.status(200).json(response);
+}
+
+export const getTransactionsHistory = async (req: Request, res: Response) => {
+  const { CodCliente } = req.params;
+  const response: ITransaction[] = await getTransactions(Number(CodCliente));
   return res.status(200).json(response);
 }

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     CodCliente: DataTypes.INTEGER,
-    Valor: DataTypes.FLOAT,
+    Valor: DataTypes.FLOAT(20,2),
     Tipo: DataTypes.STRING,
     Horário: DataTypes.DATE,
   }, { timestamps: false });

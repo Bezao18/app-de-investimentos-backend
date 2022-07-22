@@ -18,7 +18,7 @@ module.exports = {
       },
       Saldo: {
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT(20,2)
       },
     });
   },

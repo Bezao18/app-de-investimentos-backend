@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { depositIntoAccount, getClientAccount, withdrawFromAccount, getOrdersHistory } from '../controllers/conta.controller';
+import {
+  depositIntoAccount,
+  getClientAccount,
+  withdrawFromAccount,
+  getOrdersHistory,
+  getTransactionsHistory
+} from '../controllers/conta.controller';
 import validateTransaction from '../middlewares/validateTransaction';
 import checkClient from '../middlewares/checkClient';
 import validateToken from '../middlewares/validateToken';
@@ -14,6 +20,6 @@ contaRoutes.get('/:CodCliente', getClientAccount);
 
 contaRoutes.get('/ordens/:CodCliente', getOrdersHistory)
 
-// contaRoutes.get('/transacoes/:CodCliente', getTransactionsHistory)
+contaRoutes.get('/transacoes/:CodCliente', getTransactionsHistory)
 
 export default contaRoutes

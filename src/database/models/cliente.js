@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     Email: DataTypes.STRING,
     Senha: DataTypes.STRING,
-    Saldo: DataTypes.FLOAT,
+    Saldo: DataTypes.FLOAT(20,2),
   }, { timestamps: false });
 
   Cliente.associate = (models) => {

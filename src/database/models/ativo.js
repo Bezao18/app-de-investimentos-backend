@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     QtdeAtivo: DataTypes.INTEGER,
-    Valor: DataTypes.FLOAT,
+    Valor: DataTypes.FLOAT(20,2),
   }, { timestamps: false });
 
   Ativo.associate = (models) => {

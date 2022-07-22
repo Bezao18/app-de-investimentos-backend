@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },     
       Valor: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT(20,2)
       }
     });
   },
