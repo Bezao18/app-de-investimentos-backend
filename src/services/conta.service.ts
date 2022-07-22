@@ -1,7 +1,7 @@
 import HTTPErrorMessage from "../utils/HTTPErrorMessage";
 import getClientsOrder from '../utils/getClientsOrders';
 import {IOrder, ITransaction} from '../interfaces'
-const { Cliente, Ordem } = require('../database/models')
+const { Cliente, Ordem, Transacao } = require('../database/models')
 
 export const getClientInfo = async (clientId: number) => {
   const clientInfo = await Cliente.findByPk(clientId, {attributes:{exclude:['Senha']}});
@@ -21,6 +21,7 @@ export const withdrawRequest = async (transactionInfo: ITransaction): Promise<st
     throw new HTTPErrorMessage(400, `Saldo insuficiente para sacar R$${Valor}`)
   }
   Cliente.decrement({ Saldo: Valor }, { where: { CodCliente } })
+  Transacao.create({CodCliente, Valor, Tipo:'Saque'})
   return `Saque de R$${Valor} feito com sucesso`
 }
 
@@ -30,6 +31,7 @@ export const depositRequest = (transactionInfo: ITransaction): string => {
     throw new HTTPErrorMessage(400, `Não é possível depositar um valor negativo ou igual a zero`)
   }
   Cliente.increment({ Saldo: Valor }, { where: { CodCliente } })
+  Transacao.create({CodCliente, Valor, Tipo:'Depósito'})
   return `Depósito de R$${Valor} feito com sucesso`
 }
 

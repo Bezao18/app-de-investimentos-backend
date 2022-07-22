@@ -14,4 +14,6 @@ contaRoutes.get('/:CodCliente', getClientAccount);
 
 contaRoutes.get('/ordens/:CodCliente', getOrdersHistory)
 
+// contaRoutes.get('/transacoes/:CodCliente', getTransactionsHistory)
+
 export default contaRoutes
