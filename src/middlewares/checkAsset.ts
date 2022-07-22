@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 const { Ativo } = require('../database/models');
 
 
-const validateAsset = async (req: Request, res: Response, next: NextFunction) => {
+const checkAsset = async (req: Request, res: Response, next: NextFunction) => {
   const { CodAtivo } = req.body;
   const ativo = await Ativo.findByPk(CodAtivo, { attributes: ['CodAtivo'] });
   if(!ativo) {
@@ -13,4 +13,4 @@ const validateAsset = async (req: Request, res: Response, next: NextFunction) =>
   return next();
 }
 
-export default validateAsset;
+export default checkAsset;

@@ -5,6 +5,10 @@ import getClientsOrders from '../utils/getClientsOrders';
 import HTTPErrorMessage from '../utils/HTTPErrorMessage';
 
 const getClientPortfolio = async (clientId: number): Promise<IPortfolio[]> => {
+  const client = await Cliente.findByPk(clientId, { attributes: ['CodCliente'] });
+  if(!client) {
+    throw new HTTPErrorMessage(404, 'Esse cliente não existe')
+  }
   const buyOrders: IOrder[] = await getClientsOrders(clientId, 'Compra');
   const sellOrders: IOrder[] = await getClientsOrders(clientId, 'Venda');
   if (!buyOrders) {

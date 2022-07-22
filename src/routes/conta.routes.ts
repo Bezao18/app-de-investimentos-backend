@@ -9,17 +9,18 @@ import {
 import validateTransaction from '../middlewares/validateTransaction';
 import checkClient from '../middlewares/checkClient';
 import validateToken from '../middlewares/validateToken';
+import { validateCodCliente } from '../middlewares/validateReqParams';
 
 const contaRoutes = Router();
+
+contaRoutes.get('/:CodCliente', validateCodCliente, getClientAccount);
 
 contaRoutes.post('/deposito', validateTransaction, checkClient, depositIntoAccount);
 
 contaRoutes.post('/saque', validateTransaction, checkClient, withdrawFromAccount);
 
-contaRoutes.get('/:CodCliente', getClientAccount);
+contaRoutes.get('/:CodCliente/ordens', validateCodCliente, getOrdersHistory)
 
-contaRoutes.get('/ordens/:CodCliente', getOrdersHistory)
-
-contaRoutes.get('/transacoes/:CodCliente', getTransactionsHistory)
+contaRoutes.get('/:CodCliente/transacoes', validateCodCliente, getTransactionsHistory)
 
 export default contaRoutes
