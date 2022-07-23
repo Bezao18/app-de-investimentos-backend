@@ -1,18 +1,13 @@
 name: App-de-investimentos CI
-
+env:
+  NODE_ENV: test
+  JWT_SECRET: segredo
 on:
   [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-20.04
-    env:
-      DB_HOST=sql10.freesqldatabase.com
-      DATABASE=sql10508355
-      DB_PORT=3306
-      DB_USERNAME=sql10508355	
-      JWT_SECRET=segredo
-      NODE_ENV=test
     steps:
       - uses: actions/checkout@v3
       - name: Instala o node com a versão 14

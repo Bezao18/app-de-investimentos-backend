@@ -13,12 +13,13 @@ module.exports = {
     "dialect": "mysql"
   },
   "test": {
-    "username": DB_USERNAME,
+    "username": 'sql10508355',
     "password": '7gFFNrKuWA',
-    "database": DATABASE,
-    "host": DB_HOST,
-    "port": DB_PORT,
+    "database": 'sql10508355',
+    "host": 'sql10.freesqldatabase.com',
+    "port": 3306,
     "dialect": "mysql"
+  
   },
   "production": {
     "username": DB_USERNAME,
