@@ -9,20 +9,20 @@ import HTTPErrorMessage from '../../src/utils/HTTPErrorMessage';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testa a rota /conta/:CodCliente', () => {
+describe('Testa a rota GET /conta/:CodCliente', () => {
   let body: IClient;
   let status: number;
-  
+
   describe('Quando é passado o CodCliente de um cliente existente', () => {
     before(async () => {
       const response = await chai.request(app).get('/conta/1')
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 200', () => {
+    it('A requisição retorna o status 200', () => {
       expect(status).to.be.equal(200);
     });
-    it('A requisição GET para a rota retorna um objeto', () => {
+    it('A requisição retorna um objeto', () => {
       expect(body).to.be.an('object');
     });
     it('O objeto retornado possui apenas as chaves "CodCliente", "Email" e "Saldo"', () => {
@@ -37,10 +37,10 @@ describe('Testa a rota /conta/:CodCliente', () => {
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 404', () => {
+    it('A requisição retorna o status 404', () => {
       expect(status).to.be.equal(404);
     });
-    it('A requisição GET para a rota retorna a mensagem "Esse cliente não existe"', () => {
+    it('A requisição retorna a mensagem "Esse cliente não existe"', () => {
       expect(body.message).to.be.equal("Esse cliente não existe");
     });
   })
@@ -52,10 +52,10 @@ describe('Testa a rota /conta/:CodCliente', () => {
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 404', () => {
+    it('A requisição retorna o status 404', () => {
       expect(status).to.be.equal(404);
     });
-    it('A requisição GET para a rota retorna a mensagem "Essa rota está incorreta"', () => {
+    it('A requisição retorna a mensagem "Essa rota está incorreta"', () => {
       expect(body.message).to.be.equal("Essa rota está incorreta");
     });
   })

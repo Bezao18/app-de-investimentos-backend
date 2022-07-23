@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register tests/**/*.test.ts --exit",
+    "test": "NODE_ENV=test mocha --require ts-node/register tests/**/*.test.ts --timeout 10000 --exit",
     "start": "ts-node src/index.ts",
     "build": "tsc",
     "dev": "nodemon --watch \"./src/*\" --ext \"ts,js\" --exec \"ts-node src/index.ts\"",
@@ -22,7 +22,8 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.3",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.3",
@@ -33,6 +34,7 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.4",
     "@types/sequelize": "^4.28.14",
+    "@types/shelljs": "^0.8.11",
     "@types/sinon": "^10.0.13",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",

@@ -9,7 +9,7 @@ const jwtConfig: SignOptions = {
   algorithm: 'HS256',
 };
 
-const secret: string | undefined = process.env.JWT_SECRET || 'é segredo po';
+const secret: string | undefined = process.env.JWT_SECRET || 'segredo';
 export const createToken = ({ Email }: Omit<any, 'Senha'>): string | HTTPErrorMessage => {
   if (!secret) {
     throw new HTTPErrorMessage(500, 'Variável de ambiente JWT_SECRET indefinida');

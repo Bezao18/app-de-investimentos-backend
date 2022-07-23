@@ -9,10 +9,10 @@ import HTTPErrorMessage from '../../src/utils/HTTPErrorMessage';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testa a rota /ativos/cliente/:CodCliente', () => {
+describe('Testa a rota GET /ativos/cliente/:CodCliente', () => {
   let body: IPortfolio[];
   let status: number;
-  
+
   describe('Quando é passado o CodCliente de um cliente existente', () => {
     before(async () => {
       const response = await chai.request(app).get('/ativos/cliente/1')

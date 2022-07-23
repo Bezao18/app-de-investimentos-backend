@@ -7,7 +7,7 @@ import { IAtivo } from '../../src/interfaces';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testa a rota /ativos', () => {
+describe('Testa a rota GET /ativos', () => {
   let body: IAtivo[];
   let status: number;
 
@@ -17,11 +17,11 @@ describe('Testa a rota /ativos', () => {
     body = response.body;
   })
 
-  it('A requisição GET para a rota retorna o status 200', () => {
+  it('A requisição retorna o status 200', () => {
     expect(status).to.be.equal(200);
   });
 
-  it('A requisição GET para a rota retorna um array de objetos', () => {
+  it('A requisição retorna um array de objetos', () => {
     expect(body).to.be.an('array');
     expect(body[0]).to.be.an('object');
   });

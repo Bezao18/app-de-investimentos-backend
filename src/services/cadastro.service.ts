@@ -5,14 +5,15 @@ import HTTPErrorMessage from "../utils/HTTPErrorMessage";
 import { createToken } from "../utils/JWT";
 
 const createClient = async (client: IClient): Promise<string> => {
-  const clientExists = await Cliente.findOne({ where: { Email: client.Email } })
   const emailRegex = /.+@.+.com$/gm;
   const emailIsValid = emailRegex.test(client.Email as string);
   if (String(client.Senha).length < 6) {
     throw new HTTPErrorMessage(400, 'O campo Senha precisa ter pelo menos 6 caracteres')
   } if (!emailIsValid) {
     throw new HTTPErrorMessage(400, 'Email inválido')
-  } if (clientExists) {
+  } 
+  const clientExists = await Cliente.findOne({ where: { Email: client.Email } })
+  if (clientExists) {
     throw new HTTPErrorMessage(409, 'Já existe um cliente com esse Email')
   }
   const salt = bcrypt.genSaltSync(5);

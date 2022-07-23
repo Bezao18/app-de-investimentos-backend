@@ -9,7 +9,7 @@ import HTTPErrorMessage from '../../src/utils/HTTPErrorMessage';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testa a rota /conta/:CodCliente/ordens', () => {
+describe('Testa a rota GET /conta/:CodCliente/ordens', () => {
   let body: IOrder[];
   let status: number;
 
@@ -19,10 +19,10 @@ describe('Testa a rota /conta/:CodCliente/ordens', () => {
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 200', () => {
+    it('A requisição retorna o status 200', () => {
       expect(status).to.be.equal(200);
     });
-    it('A requisição GET para a rota retorna um array de objetos', () => {
+    it('A requisição retorna um array de objetos', () => {
       expect(body).to.be.an('array');
       expect(body[0]).to.be.an('object');
 
@@ -40,10 +40,10 @@ describe('Testa a rota /conta/:CodCliente/ordens', () => {
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 404', () => {
+    it('A requisição retorna o status 404', () => {
       expect(status).to.be.equal(404);
     });
-    it('A requisição GET para a rota retorna a mensagem "Esse cliente não existe"', () => {
+    it('A requisição retorna a mensagem "Esse cliente não existe"', () => {
       expect(body.message).to.be.equal("Esse cliente não existe");
     });
   })
@@ -55,10 +55,10 @@ describe('Testa a rota /conta/:CodCliente/ordens', () => {
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 404', () => {
+    it('A requisição retorna o status 404', () => {
       expect(status).to.be.equal(404);
     });
-    it('A requisição GET para a rota retorna a mensagem "Esse cliente não realizou nenhuma ordem"', () => {
+    it('A requisição retorna a mensagem "Esse cliente não realizou nenhuma ordem"', () => {
       expect(body.message).to.be.equal("Esse cliente não realizou nenhuma ordem");
     });
   })
@@ -70,10 +70,10 @@ describe('Testa a rota /conta/:CodCliente/ordens', () => {
       status = response.status;
       body = response.body;
     })
-    it('A requisição GET para a rota retorna o status 404', () => {
+    it('A requisição retorna o status 404', () => {
       expect(status).to.be.equal(404);
     });
-    it('A requisição GET para a rota retorna a mensagem "Essa rota está incorreta"', () => {
+    it('A requisição retorna a mensagem "Essa rota está incorreta"', () => {
       expect(body.message).to.be.equal("Essa rota está incorreta");
     });
   })
