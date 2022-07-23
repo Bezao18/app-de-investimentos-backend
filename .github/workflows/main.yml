@@ -1,5 +1,9 @@
-name: Node.js CI
-
+name: App-de-investimentos CI
+env:
+  NODE_ENV: test
+  DB_USER: root
+  DB_PASSWORD: root
+  
 on:
   [push, pull_request]
 
