@@ -10,19 +10,23 @@ const { expect } = chai;
 describe('Testa a rota /ativos', () => {
   let body: IAtivo[];
   let status: number;
+
   before(async () => {
     const response = await chai.request(app).get('/ativos')
     status = response.status;
     body = response.body;
   })
+
   it('A requisição GET para a rota retorna o status 200', () => {
     expect(status).to.be.equal(200);
   });
+
   it('A requisição GET para a rota retorna um array de objetos', () => {
     expect(body).to.be.an('array');
     expect(body[0]).to.be.an('object');
   });
-  it('Os objetos retornados no array possuem as chaves "CodAtivo", "QtdeAtivo" e "Valor"', () => {
+
+  it('Os objetos retornados no array possuem apenas as chaves "CodAtivo", "QtdeAtivo" e "Valor"', () => {
     expect(body[0]).to.include.all.keys("CodAtivo", "QtdeAtivo", "Valor");
   });
 })

@@ -18,11 +18,6 @@ module.exports = {
         Valor:1481.33,
         Tipo:'Depósito'
       },
-      {
-        CodCliente: 4,
-        Valor:150357,
-        Tipo:'Depósito'
-      },
     ])
   },
 

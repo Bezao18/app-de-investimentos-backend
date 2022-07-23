@@ -22,7 +22,7 @@ module.exports = {
         {
           Email: 'loremipsum@email.com',
           Senha: "$2a$05$PV0G6Ofcuv3AaRiqALi.0eRRqI96m5mqIoSf8E/yZhlq/3QSDDybK",
-          Saldo: 150357.25,
+          Saldo: 0,
         },
       ], { timestamps: false });
   },

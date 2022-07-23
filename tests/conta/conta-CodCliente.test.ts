@@ -12,6 +12,7 @@ const { expect } = chai;
 describe('Testa a rota /conta/:CodCliente', () => {
   let body: IClient;
   let status: number;
+  
   describe('Quando é passado o CodCliente de um cliente existente', () => {
     before(async () => {
       const response = await chai.request(app).get('/conta/1')
@@ -28,6 +29,7 @@ describe('Testa a rota /conta/:CodCliente', () => {
       expect(body).to.include.all.keys("CodCliente", "Email", "Saldo");
     });
   })
+
   describe('Quando é passado o CodCliente de um cliente que não existe', () => {
     let body: HTTPErrorMessage;
     before(async () => {
