@@ -30,7 +30,7 @@ export const newSellOrder = async (sellOrder: IOrder) => {
   const portfolio = await getClientPortfolio(CodCliente)
   const selectedAsset = portfolio.find((asset: IAtivo) => asset.CodAtivo === CodAtivo)
   if (!selectedAsset || selectedAsset.QtdeAtivo < QtdeAtivo) {
-    throw new HTTPErrorMessage(400, 'Ativos suficientes para essa operação')
+    throw new HTTPErrorMessage(400, 'Ativos insuficientes para essa operação')
   }
   Ordem.create({ CodCliente, CodAtivo, ValorPago: asset.Valor, QtdeAtivo, Tipo: 'Venda' })
   Ativo.increment({ QtdeAtivo }, { where: { CodAtivo } })

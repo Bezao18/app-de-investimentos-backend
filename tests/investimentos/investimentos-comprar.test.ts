@@ -1,6 +1,6 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http';
-import { before } from 'mocha';
+import { before, after } from 'mocha';
 import app from '../../src/app';
 import { IOrder } from '../../src/interfaces';
 import resetDatabase from '../utils/resetDatabase';
@@ -25,6 +25,10 @@ describe('Testa a rota POST /investimentos/comprar', () => {
       body = response.body;
     })
 
+    after(() => {
+      resetDatabase()
+    })
+
     it('A requisição retorna o status 200', () => {
       expect(status).to.be.equal(200);
     });
@@ -38,7 +42,6 @@ describe('Testa a rota POST /investimentos/comprar', () => {
 
   describe('Enviando um body com QtdeAtivo inválida', () => {
     before(async () => {
-      resetDatabase()
       reqBody = { CodCliente: 1, CodAtivo: 1, QtdeAtivo: -1 }
       const response = await chai.request(app).post('/investimentos/comprar').send(reqBody);
       status = response.status;
@@ -56,7 +59,6 @@ describe('Testa a rota POST /investimentos/comprar', () => {
 
   describe('Enviando um body com QtdeAtivo maior que a quantidade disponível de ativos', () => {
     before(async () => {
-      resetDatabase()
       reqBody = { CodCliente: 1, CodAtivo: 1, QtdeAtivo: 10000000000000 }
       const response = await chai.request(app).post('/investimentos/comprar').send(reqBody);
       status = response.status;
@@ -74,7 +76,6 @@ describe('Testa a rota POST /investimentos/comprar', () => {
 
   describe('Enviando um body com valor total maior que o saldo do cliente', () => {
     before(async () => {
-      resetDatabase()
       reqBody = { CodCliente: 4, CodAtivo: 1, QtdeAtivo: 1 }
       const response = await chai.request(app).post('/investimentos/comprar').send(reqBody);
       status = response.status;
