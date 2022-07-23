@@ -1,0 +1,18 @@
+name: Node.js CI
+
+on:
+  [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Instala o node com a versão 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: instalando as dependências
+          run: npm install
+      - name: realizando os testes
+          run: npm test
