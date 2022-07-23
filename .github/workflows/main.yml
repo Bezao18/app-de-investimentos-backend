@@ -7,7 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     env:
-      DB_PASSWORD=7gFFNrKuWA
       DB_HOST=sql10.freesqldatabase.com
       DATABASE=sql10508355
       DB_PORT=3306
