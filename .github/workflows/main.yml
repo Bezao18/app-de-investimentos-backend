@@ -12,7 +12,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
+
       - name: instalando as dependências
-          run: npm install
+        run: npm install
+
       - name: realizando os testes
-          run: npm test
+        run: npm test
