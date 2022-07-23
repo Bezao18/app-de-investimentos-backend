@@ -1,9 +1,12 @@
 name: App-de-investimentos CI
 env:
   NODE_ENV: test
-  DB_USER: root
-  DB_PASSWORD: root
-  
+  DB_HOST: db.tgacvxrsxjhtzmuqcvzy.supabase.co
+  DB_PASSWORD: ansjdnbwquiojredoajjnfjnvcipwqrrr
+  DATABASE: postgres
+  DB_PORT: 5432
+  DB_USERNAME: postgres
+  JWT_SECRET: segredo
 on:
   [push, pull_request]
 

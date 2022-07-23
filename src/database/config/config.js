@@ -13,12 +13,12 @@ module.exports = {
     "dialect": "mysql"
   },
   "test": {
-    "username": 'root',
-    "password": 'password',
-    "database": 'app-de-investimentos-test',
-    "host": 'localhost',
-    "port": 3306,
-    "dialect": "mysql"
+    "username": DB_USERNAME,
+    "password": DB_PASSWORD,
+    "database": DATABASE,
+    "host": DB_HOST,
+    "port": DB_PORT,
+    "dialect": "postgres"
   },
   "production": {
     "username": DB_USERNAME,
