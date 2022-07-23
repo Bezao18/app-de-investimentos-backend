@@ -1,12 +1,13 @@
 
 const testGenerator = () => {
-  const describeObj: any = [
+  const describeObj: IDescribe[] = [
     {
+      description:'',
       before: '',
       it:[
-        { expect: 'statusCode', toBe: 'equal', to: '200' },
-        { expect: 'variavel1', toBe: 'notEqual', to: null },
-        { expect: 'função1', toBe: 'instanced', with: 'parametros' }
+        {description:'', expect: 'statusCode', toBe: 'equal', to: '200' },
+        {description:'', expect: 'variavel1', toBe: 'notEqual', to: null },
+        {description:'', expect: 'função1', toBe: 'instanced', with: 'parametros' }
     ],
       after: '',
     },
@@ -14,17 +15,17 @@ const testGenerator = () => {
 }
 
 interface IDescribe {
+  description: string;
   before?: string;
   after?: string;
   it: ITest[];
 }
 
-
-
 interface ITest {
+  description:string;
   expect: string;
-  toBe: string;
-  to?: string;
+  toBe: Methods;
+  to?: any;
   with?: string;
 }
 

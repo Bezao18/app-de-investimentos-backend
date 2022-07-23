@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --require ts-node/register tests/**/*.test.ts --timeout 10000 --exit",
+    "test": "NODE_ENV=test mocha --require ts-node/register tests/**/*.test.ts --timeout 10000  --exit",
+    "test:coverage": "NODE_ENV=test nyc mocha --require ts-node/register tests/**/*.test.ts --timeout 10000 --exit",
     "start": "ts-node src/index.ts",
     "build": "tsc",
     "dev": "nodemon --watch \"./src/*\" --ext \"ts,js\" --exec \"ts-node src/index.ts\"",
@@ -41,6 +42,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
+    "nyc": "^15.1.0",
     "sinon": "^14.0.0",
     "ts-node": "^10.9.1"
   },

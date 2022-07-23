@@ -13,19 +13,19 @@ dotenv.config();
 const { expect } = chai;
 
 
-describe('Testa a rota POST /cadastro', () => {
+describe('Testa a rota POST /login', () => {
   let body: any;
   let status: number;
   let reqBody: IClient;
 
-  describe('Enviando um body com Email e Senha válidos', () => {
+  describe('Enviando um body com Email e Senha corretos', () => {
     before(async () => {
-      reqBody = { Email: 'teste@email.com', Senha: 'password' }
-      const response = await chai.request(app).post('/cadastro').send(reqBody);
+      reqBody = { Email: 'silviosantos@email.com', Senha: 'abcdef' }
+      const response = await chai.request(app).post('/login').send(reqBody);
       status = response.status;
       body = response.body;
     })
-    resetDatabase();
+
     it('A requisição retorna o status 200', () => {
       expect(status).to.be.equal(200);
     });
@@ -36,16 +36,13 @@ describe('Testa a rota POST /cadastro', () => {
       expect(Email).to.be.equal(reqBody.Email);
     });
 
-    it('O cliente é inserido no banco de dados', async () => {
-      const client = await Cliente.findOne({ where: { Email: reqBody.Email } })
-      expect(client).to.not.equal(null)
-    })
   })
 
-  describe('Enviando um body com Email inválido', () => {
+  describe('Enviando um body com Email incorreto', () => {
     before(async () => {
-      reqBody = { Email: 'email.com', Senha: 'password' }
-      const response = await chai.request(app).post('/cadastro').send(reqBody);
+      resetDatabase()
+      reqBody = { Email: 'teste@email.com', Senha: 'password' }
+      const response = await chai.request(app).post('/login').send(reqBody);
       status = response.status;
       body = response.body;
     })
@@ -54,15 +51,15 @@ describe('Testa a rota POST /cadastro', () => {
       expect(status).to.be.equal(400);
     });
 
-    it('A requisição retorna a mensagem "Email inválido"', () => {
-      expect(body.message).to.be.equal("Email inválido");
+    it('A requisição retorna a mensagem "Dados inválidos"', () => {
+      expect(body.message).to.be.equal("Dados inválidos");
     });
   })
 
-  describe('Enviando um body com Senha inválida', () => {
+  describe('Enviando um body com Senha incorreta', () => {
     before(async () => {
-      reqBody = { Email: 'teste@email.com', Senha: 'senha' }
-      const response = await chai.request(app).post('/cadastro').send(reqBody);
+      reqBody = { Email: 'silviosantos@email.com', Senha: 'password' }
+      const response = await chai.request(app).post('/login').send(reqBody);
       status = response.status;
       body = response.body;
     })
@@ -71,15 +68,15 @@ describe('Testa a rota POST /cadastro', () => {
       expect(status).to.be.equal(400);
     });
 
-    it('A requisição retorna a mensagem "O campo Senha precisa ter pelo menos 6 caracteres"', () => {
-      expect(body.message).to.be.equal("O campo Senha precisa ter pelo menos 6 caracteres");
+    it('A requisição retorna a mensagem "Dados inválidos"', () => {
+      expect(body.message).to.be.equal("Dados inválidos");
     });
   })
 
   describe('Enviando um body sem Email', () => {
     before(async () => {
       reqBody = { Senha: 'senha' }
-      const response = await chai.request(app).post('/cadastro').send(reqBody);
+      const response = await chai.request(app).post('/login').send(reqBody);
       status = response.status;
       body = response.body;
     })
@@ -95,7 +92,7 @@ describe('Testa a rota POST /cadastro', () => {
   describe('Enviando um body sem Senha', () => {
     before(async () => {
       reqBody = { Email: 'teste@email.com' }
-      const response = await chai.request(app).post('/cadastro').send(reqBody);
+      const response = await chai.request(app).post('/login').send(reqBody);
       status = response.status;
       body = response.body;
     })
@@ -105,22 +102,6 @@ describe('Testa a rota POST /cadastro', () => {
 
     it('A requisição retorna a mensagem "O campo Senha é obrigatório"', () => {
       expect(body.message).to.be.equal("O campo Senha é obrigatório");
-    });
-  })
-
-  describe('Enviando um body com um Email já existente', () => {
-    before(async () => {
-      reqBody = { Email: 'silviosantos@email.com', Senha: 'password' }
-      const response = await chai.request(app).post('/cadastro').send(reqBody);
-      status = response.status;
-      body = response.body;
-    })
-    it('A requisição retorna o status 409', () => {
-      expect(status).to.be.equal(409);
-    });
-
-    it('A requisição retorna a mensagem "Já existe um cliente com esse Email"', () => {
-      expect(body.message).to.be.equal("Já existe um cliente com esse Email");
     });
   })
 
