@@ -11,6 +11,7 @@ module.exports = {
       CodCliente:{
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Clientes',
           key: 'CodCliente'
@@ -18,7 +19,7 @@ module.exports = {
       },
       Valor:{
         allowNull: false,
-        type: Sequelize.FLOAT(20,2),
+        type: Sequelize.FLOAT,
       },
       Tipo: {
         allowNull: false,
@@ -27,11 +28,11 @@ module.exports = {
       Horário: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now')
+        defaultValue: Sequelize.NOW
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('transacaos');
+    await queryInterface.dropTable('Transacaos');
   }
 };

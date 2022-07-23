@@ -14,11 +14,11 @@ module.exports = {
   },
   "test": {
     "username": DB_USERNAME,
-    "password": DB_PASSWORD,
+    "password": '7gFFNrKuWA',
     "database": DATABASE,
     "host": DB_HOST,
     "port": DB_PORT,
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "production": {
     "username": DB_USERNAME,
@@ -26,6 +26,6 @@ module.exports = {
     "database": DATABASE,
     "host": DB_HOST,
     "port": DB_PORT,
-    "dialect": "postgres"
+    "dialect": "mysql"
   }
 }

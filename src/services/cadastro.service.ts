@@ -18,7 +18,7 @@ const createClient = async (client: IClient): Promise<string> => {
   }
   const salt = bcrypt.genSaltSync(5);
   const Senha = bcrypt.hashSync(client.Senha as string, salt);
-  Cliente.create({ Email: client.Email, Senha, Saldo: 0 })
+  await Cliente.create({ Email: client.Email, Senha, Saldo: 0 })
   const token = createToken(client)
   return token as string;
 }

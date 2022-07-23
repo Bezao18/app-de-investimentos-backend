@@ -11,6 +11,7 @@ module.exports = {
       CodCliente: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Clientes',
           key: 'CodCliente'
@@ -19,6 +20,7 @@ module.exports = {
       CodAtivo: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Ativos',
           key: 'CodAtivo'
@@ -30,7 +32,7 @@ module.exports = {
       },
       ValorDaOrdem: {
         allowNull: false,
-        type: Sequelize.FLOAT(20,2),
+        type: Sequelize.FLOAT(20,2)
       },
       Tipo: {
         allowNull: false,
@@ -39,7 +41,7 @@ module.exports = {
       Horário: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now')
+        defaultValue: Sequelize.NOW
       },
     });
   },
