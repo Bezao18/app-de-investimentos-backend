@@ -6,6 +6,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    env:
+      DB_PASSWORD=7gFFNrKuWA
+      DB_HOST=sql10.freesqldatabase.com
+      DATABASE=sql10508355
+      DB_PORT=3306
+      DB_USERNAME=sql10508355	
+      JWT_SECRET=segredo
+      NODE_ENV=test
     steps:
       - uses: actions/checkout@v3
       - name: Instala o node com a versão 14
@@ -18,11 +26,3 @@ jobs:
 
       - name: realizando os testes
         run: npm test
-        env:
-          DB_PASSWORD=7gFFNrKuWA
-          DB_HOST=sql10.freesqldatabase.com
-          DATABASE=sql10508355
-          DB_PORT=3306
-          DB_USERNAME=sql10508355	
-          JWT_SECRET=segredo
-          NODE_ENV=test
