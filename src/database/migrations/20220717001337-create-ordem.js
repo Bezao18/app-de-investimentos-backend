@@ -41,7 +41,7 @@ module.exports = {
       Horário: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.fn('now')
       },
     });
   },

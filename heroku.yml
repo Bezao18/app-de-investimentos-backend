@@ -1,0 +1,4 @@
+build:
+  web: tsc
+run:
+  web: node index.js
