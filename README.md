@@ -101,7 +101,7 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
      Essa rota retorna todos ativos na carteira do cliente com o CodCliente selecionado. Valor é a sua cotação atual e QtdeAtivo é a quantidade desse ativo que o cliente possui em sua carteira.
     <br>
      <img alt="Rota GET /ativos/cliente/:CodCliente" src="./images/GET-ativos-cliente-:CodCliente.png"/>
-    <hr>
+     <br>
      ⚠️Essa rota foi feita desse jeito pois /ativos/:CodCliente conflitaria com a rota /ativos/:CodAtivo. Uma outra solução pensada foi usar query parameters, mas para evitar erros de digitação do endpoint, foi feita a rota /ativos/cliente/:CodCliente⚠️
   </details>
   <details>
@@ -213,6 +213,8 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
     ou não siga uma das regras de negócio.
     <hr>
     ⚠️O token seria utilizado para proteger algumas rotas, mas não houve tempo para implementa-lo corretamente⚠️
+    <br>
+    ⚠️As senhas dos clientes já criados estão criptografadas no banco de dados, mas todas elas são "abcdef"⚠️
   </details>
 </details>
 
@@ -220,7 +222,7 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
 <summary><h2>😅Maiores desafios😅</h2></summary><br /> 
   <ul>
     <li>
-      Preparar o ambiente para fazer deploy de uma aplicação que depende de banco de dados ( não consegui realizar :( )
+      Preparar o ambiente para fazer deploy de uma aplicação que depende de banco de dados ( não consegui realizar 🙁 )
     </li>
     <li>
       Realizar a aplicação com qualidade e escalabilidade, implementando ideias além dos requisitos, mas dentro do prazo de entrega
