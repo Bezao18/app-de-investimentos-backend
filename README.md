@@ -20,24 +20,27 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
 <details>
   <summary><strong>Como rodar a aplicação:</strong></summary><br />
  Como a aplicação utiliza um banco de dados local será necessário rodar um container Docker com uma imagem MySQL para conseguir realizar as requisições.
- <br>
- - Primeiro rode <code>npm install</code> para instalar as dependências
- <br>
- - Seguido de  <code>docker-compose up</code> para rodar o MySQL na porta 3306 e <code>npm run db:reset</code> para criar o banco de dados.
- <br>
- - E por útilmo  <code>npm start</code> para rodar a aplicação.
- <hr>
+  <br>
  A API rodará na porta 3000 por padrão mas pode ser definida no .env como PORT.
+  <br>
  Caso já tenha MySQL localmente na máquina, poderá utilizá-lo criando um .env passando os valores 
  para as seguintes variáveis: DB_USERNAME, DB_PASSWORD,  DB_HOST, DB_PORT.
- <hr>
- ⚠️Lembre-se de deixar as portas 3000 e 3306 vagas caso optar por não criar um arquivo .env⚠️
+ <br>
+ <h3>⚠️Lembre-se de deixar as portas 3000 e 3306 vagas caso optar por não criar um arquivo .env⚠️ </h3>
+ <br>
+  <ul>
+    <li>Primeiro rode <code>npm install</code> para instalar as dependências</li>
+    <li>🚨Seguido de  <code>docker-compose up</code> para rodar o MySQL na porta 3306🚨</li> 
+    <li><code>npm run db:reset</code> para criar o banco de dados</li>
+    <li>E por útilmo  <code>npm start</code> para rodar a aplicação</li>
+  </ul>
+  🚨Esse passo pode ser pulado caso haja MySQL na sua máquina e você crie um arquivo .env com as variáveis citadas anteriormente🚨
 </details>
 
 <hr>
 
 <details>
-<summary><h2>Processo de desenvolvimento</h2></summary><br /> 
+<summary><h2>🖥Processo de desenvolvimento🖥</h2></summary><br /> 
 <ul>
   <li>O primeiro passo que foi tomado foi interpretar o desafio e elaborar como os dados seriam organizados de acordo com as informações que eram       pedidas. 
   Foram consideradas as entidades: Ativos, Clientes, Ordens e Transações. E foram estabelecidas relações entre elas visando alcançar a normalização
@@ -71,18 +74,16 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
   <li>
     O último passo foi criar uma GitHub Action que executasse os testes a cada push ou pull request para esse repositório. Essa etapa foi bem complicada     porque os testes eram de integração, então precisavam de um banco de dados para passar. Em bancos de dados remotos, tanto Postgres quanto MySQL, os       testes não passavam sempre, mas na minha máquina sim. 
     <br>
-    Eu precisava de um ambiente que tivesse exatamente as dependências que eu estava utilizando, por isso eu utilizei o Docker para criar um container com MySQL e conseguir rodar os testes no GitHub.
+    Eu precisava de um ambiente que fosse compatível com as dependências que eu estava utilizando, por isso eu utilizei o Docker para criar um container    com MySQL e consegui rodar os testes no GitHub.
   </li>
   <br>
   <li>
-    Foi tentado fazer deploy no Heroku, mas sem sucesso. O motivo não é certo ainda, mas é provável que seja um problema no banco de dados, pois a           aplicação roda localmente sem erros.
+    Foi tentado fazer deploy no Heroku, mas sem sucesso. O motivo não é certo ainda, mas é provável que seja um problema na conexão com o banco de dados, pois a aplicação roda localmente sem erros.
   </li>
 </ul>
 </details>
 
-<hr>
-
-<details><summary><h2>Rotas</h2></summary><br />
+<details><summary><h2>🛣Rotas🛣</h2></summary><br />
   <details>
   <summary><strong>Rota GET /ativos</strong></summary><br />
     Essa rota retorna todos os ativos disponíveis na corretora. Valor é a sua cotação atual e QtdeAtivo é a quantidade disponível na corretora.
@@ -215,16 +216,14 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
   </details>
 </details>
 
-<hr>
-
 <details>
-<summary><h2>Maiores desafios</h2></summary><br /> 
+<summary><h2>😅Maiores desafios😅</h2></summary><br /> 
   <ul>
     <li>
       Preparar o ambiente para fazer deploy de uma aplicação que depende de banco de dados ( não consegui realizar :( )
     </li>
     <li>
-      Realizar a aplicação mantendo o equilíbrio entre escalabilidade e o prazo de entrega
+      Realizar a aplicação com qualidade e escalabilidade, implementando ideias além dos requisitos, mas dentro do prazo de entrega
     </li>
     <li>
       Pensar no maior número de exceções possíveis para serem tratadas (testes ajudaram muito nisso)
@@ -232,10 +231,8 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
   </ul>
 </details>
 
-<hr>
-
 <details>
-<summary><h2>Aprendizados</h2></summary><br /> 
+<summary><h2>🧐Aprendizados🧐</h2></summary><br /> 
   <ul>
     <li>
       Aprendi a utilizar a biblioteca Bcrypt para encriptografar senhas
@@ -249,19 +246,20 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
   </ul>
 </details>
 
-<hr>
-
 <details>
-<summary><h2>Implementações futuras</h2></summary><br /> 
+<summary><h2>🤔Implementações futuras🤔</h2></summary><br /> 
   <ul>
     <li>
-      Implementar autenticação em diversas rotas
+      Implementar autenticação em diversas rotas. (isso permitiria remover o CodCliente de várias requisições).
+    </li>
+    <li>
+      Implementar rotas para alteração de dados. Ex: email e senha do cliente.
     </li>
     <li>
       Mudar algumas chaves na tabela e nos bodies para evitar ambiguidade. Ex: QtdeAtivo, Valor.
     </li>
     <li>
-      Realizar o deploy da aplicação
+      Realizar o deploy da aplicação.
     </li>
     <li>
       Melhorar a documentação da aplicação. Ex: Deixar explícito cada regra de negócios, utilizar o Swagger para documentar os endpoints.
