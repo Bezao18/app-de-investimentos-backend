@@ -48,37 +48,43 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
 <details><summary><h2>Rotas</h2></summary><br />
   <details>
   <summary><strong>Rota GET /ativos</strong></summary><br />
-    <img alt="Rota GET /ativos" src="./images/GET-ativos.png"/>
     Essa rota retorna todos os ativos disponíveis na corretora. Valor é a sua cotação atual e QtdeAtivo é a quantidade disponível na corretora.
+    <br>
+    <img alt="Rota GET /ativos" src="./images/GET-ativos.png"/>
   </details>
   <details>
   <summary><strong>Rota GET /ativos/:CodAtivo</strong></summary><br />
-     <img alt="Rota GET /ativos/:CodAtivo" src="./images/GET-ativos-:CodAtivo.png"/>
      Essa rota retorna apenas o ativo com o CodAtivo selecionado. Valor é a sua cotação atual e QtdeAtivo é a quantidade disponível na corretora.
+        <br>
+     <img alt="Rota GET /ativos/:CodAtivo" src="./images/GET-ativos-:CodAtivo.png"/>
   </details>
   <details>
   <summary><strong>Rota GET /ativos/cliente/:CodCliente</strong></summary><br />
-     <img alt="Rota GET /ativos/cliente/:CodCliente" src="./images/GET-ativos-cliente-:CodCliente.png"/>
      Essa rota retorna todos ativos na carteira do cliente com o CodCliente selecionado. Valor é a sua cotação atual e QtdeAtivo é a quantidade desse ativo que o cliente possui em sua carteira.
+    <br>
+     <img alt="Rota GET /ativos/cliente/:CodCliente" src="./images/GET-ativos-cliente-:CodCliente.png"/>
     <hr>
      ⚠️Essa rota foi feita desse jeito pois /ativos/:CodCliente conflitaria com a rota /ativos/:CodAtivo. Uma outra solução pensada foi usar query parameters, mas para evitar erros de digitação do endpoint, foi feita a rota /ativos/cliente/:CodCliente⚠️
   </details>
   <details>
   <summary><strong>Rota GET /conta/:CodCliente</strong></summary><br />
-    <img alt="Rota GET /conta/:CodCliente" src="./images/GET-conta-:CodCliente.png"/>
      Essa rota retorna os dados da conta com o CodCliente selecionado.
+    <br>
+    <img alt="Rota GET /conta/:CodCliente" src="./images/GET-conta-:CodCliente.png"/>
   </details>
   <details>
   <summary><strong>Rota GET /conta/:CodCliente/ordens</strong></summary><br />
-    <img alt="Rota GET /conta/:CodCliente/ordens" src="./images/GET-conta-:CodCliente-ordens.png"/>
      Essa rota retorna o histórico de ordens de compra e venda do cliente com o CodCliente selecionado. QtdeAtivo é 
     quantidade vendida ou comprada nessa ordem e o ValorDaOrdem é a cotação do ativo no momento em que a ordem foi executada
     (ou seja, é o valor de uma unidade do ativo).
+    <br>
+    <img alt="Rota GET /conta/:CodCliente/ordens" src="./images/GET-conta-:CodCliente-ordens.png"/>
   </details>
   <details>
   <summary><strong>Rota GET /conta/:CodCliente/transacoes</strong></summary><br />
-    <img alt="Rota GET /conta/:CodCliente/transacoes" src="./images/GET-conta-:CodCliente-transacoes.png"/>
      Essa rota retorna o histórico de transações do cliente com o CodCliente selecionado.
+    <br>
+    <img alt="Rota GET /conta/:CodCliente/transacoes" src="./images/GET-conta-:CodCliente-transacoes.png"/>
   </details>
   <details>
   <summary><strong>Rota POST /conta/saque</strong></summary><br />
