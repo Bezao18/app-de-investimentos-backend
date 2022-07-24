@@ -15,8 +15,11 @@ jobs:
         with:
           node-version: 14
 
-      - name: instalando as dependências
+      - name: Roda o MySql através do Docker
+        run: docker-compose up -d
+
+      - name: Instala as dependências
         run: npm install
 
-      - name: realizando os testes
+      - name: Realiza os testes
         run: npm test

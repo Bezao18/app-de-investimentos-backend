@@ -21,7 +21,7 @@ describe('Testa a rota POST /cadastro', () => {
   describe('Enviando um body com Email e Senha válidos', () => {
     before(async () => {
       resetDatabase();
-      reqBody = { Email: 'teste@email.com', Senha: 'password' }
+      reqBody = { Email: 'dasjdnafjewq@email.com', Senha: 'password' }
       const response = await chai.request(app).post('/cadastro').send(reqBody);
       status = response.status;
       body = response.body;

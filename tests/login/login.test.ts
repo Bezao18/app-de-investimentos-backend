@@ -41,7 +41,7 @@ describe('Testa a rota POST /login', () => {
   describe('Enviando um body com Email incorreto', () => {
     before(async () => {
       resetDatabase()
-      reqBody = { Email: 'teste@email.com', Senha: 'password' }
+      reqBody = { Email: 'aaaaaa@email.com', Senha: 'password' }
       const response = await chai.request(app).post('/login').send(reqBody);
       status = response.status;
       body = response.body;

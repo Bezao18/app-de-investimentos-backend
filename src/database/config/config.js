@@ -13,19 +13,20 @@ module.exports = {
     "dialect": "mysql"
   },
   "test": {
-    "username": 'sql10508355',
-    "password": '7gFFNrKuWA',
-    "database": 'sql10508355',
-    "host": 'sql10.freesqldatabase.com',
+    "username": 'root',
+    "password": 'password',
+    "database": 'app-de-investimentos-test',
+    "host": 'localhost',
     "port": 3306,
     "dialect": "mysql"
   
   },
   "production": {
-    "username": DB_USERNAME,
-    "password": DB_PASSWORD,
-    "database": DATABASE,
-    "host": DB_HOST,
+    "username": 'root',
+    "password": 'password',
+    "database": 'app-de-investimentos-test',
+    "host": 'localhost',
+    "port": 3306,
     "dialect": "mysql"
   }
 }
