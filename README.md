@@ -32,10 +32,12 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
  para as seguintes variáveis: DB_USERNAME, DB_PASSWORD,  DB_HOST, DB_PORT.
  <hr>
  ⚠️Lembre-se de deixar as portas 3000 e 3306 vagas caso optar por não criar um arquivo .env⚠️
- 
 </details>
 
-## Processo de desenvolvimento
+<hr>
+
+<details>
+<summary><h2>Processo de desenvolvimento</h2></summary><br /> 
 <ul>
   <li>O primeiro passo que foi tomado foi interpretar o desafio e elaborar como os dados seriam organizados de acordo com as informações que eram       pedidas. 
   Foram consideradas as entidades: Ativos, Clientes, Ordens e Transações. E foram estabelecidas relações entre elas visando alcançar a normalização
@@ -43,8 +45,43 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
   boa performance em escalas maiores. Como esse projeto apresenta uma escala menor, a performance não foi o foco dessa organização.</li>
   <img alt="Diagrama do banco de dados" src="./images/Diagrama-DB.png"/>
   <br>
-  <li>O próximo passo foi interpretar as rotas e os retornos esperados do desafio. Em alguns momentos houve um pouco de ambiguidade no que era pedido e por isso foram tomadas algumas liberdades com relação às rotas. Em um caso real a comunicação com o cliente ou P.O. resolveria essa situação, facilitando desenvolver a aplicação da forma mais próxima do desejado. </li>
+  <li>
+    O próximo passo foi interpretar as rotas e os retornos esperados do desafio. Em alguns momentos houve um pouco de ambiguidade no que era pedido e por     isso foram tomadas algumas liberdades com relação às rotas. Em um caso real a comunicação com o cliente ou P.O. resolveria essa situação, facilitando     desenvolver a aplicação da forma mais próxima do desejado. 
+  </li>
+  <br>
+  <li>
+    O projeto foi feito utilizando a arquitetura MSC. Foi utilizado o Sequelize para a camada de Model, pois o plano era realizar testes localmente
+    no MySQL e realizar um deploy utilizando Postgres. Esse ORM iria possibilitar a migração de banco de dados com mais facilidade.
+    <br>
+    A camada de controllers foi responsável por receber as requisições e passa-las para a camada de services, que aplica as regras de negócio e comunica     com a camada de models, que que interage com o banco de dados.
+    <br>
+    Essa arquitetura foi escolhida pois ela facilita a organização de arquivos e responsabilidades. Tornando a aplicação escalável e facilitando sua         manutenção.
+  </li>
+  <br>
+  <li>
+    Ao desenvolver a aplicação, foi necessário pensar quais requisições podem fugir das regras de negócio esperadas e tratar essas exceções. Para isso      foi utilizada a biblioteca <code>express-async-errors</code>, que facilitou o tratamento de exceções.
+  </li>
+  <br>
+  <li>
+    Após desenvolver a aplicação foram desenvolvidos testes de integração utilizando mocha e chai. Foram escolhidos testes de integração, pois o objetivo     era testar se a aplicação funcionava como um todo.
+    <br>
+    Os testes foram muito úteis pois durante o processo de criação de testes foram descobertos diversos bugs que tinham passado despercebidos.
+  </li>
+  <br>
+  <li>
+    O último passo foi criar uma GitHub Action que executasse os testes a cada push ou pull request para esse repositório. Essa etapa foi bem complicada     porque os testes eram de integração, então precisavam de um banco de dados para passar. Em bancos de dados remotos, tanto Postgres quanto MySQL, os       testes não passavam sempre, mas na minha máquina sim. 
+    <br>
+    Eu precisava de um ambiente que tivesse exatamente as dependências que eu estava utilizando, por isso eu utilizei o Docker para criar um container com MySQL e conseguir rodar os testes no GitHub.
+  </li>
+  <br>
+  <li>
+    Foi tentado fazer deploy no Heroku, mas sem sucesso. O motivo não é certo ainda, mas é provável que seja um problema no banco de dados, pois a           aplicação roda localmente sem erros.
+  </li>
 </ul>
+</details>
+
+<hr>
+
 <details><summary><h2>Rotas</h2></summary><br />
   <details>
   <summary><strong>Rota GET /ativos</strong></summary><br />
@@ -177,9 +214,62 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
     ⚠️O token seria utilizado para proteger algumas rotas, mas não houve tempo para implementa-lo corretamente⚠️
   </details>
 </details>
-<ul>
-  <li></li>
-</ul>
+
+<hr>
+
+<details>
+<summary><h2>Maiores desafios</h2></summary><br /> 
+  <ul>
+    <li>
+      Preparar o ambiente para fazer deploy de uma aplicação que depende de banco de dados ( não consegui realizar :( )
+    </li>
+    <li>
+      Realizar a aplicação mantendo o equilíbrio entre escalabilidade e o prazo de entrega
+    </li>
+    <li>
+      Pensar no maior número de exceções possíveis para serem tratadas (testes ajudaram muito nisso)
+    </li>
+  </ul>
+</details>
+
+<hr>
+
+<details>
+<summary><h2>Aprendizados</h2></summary><br /> 
+  <ul>
+    <li>
+      Aprendi a utilizar a biblioteca Bcrypt para encriptografar senhas
+    </li>
+    <li>
+      Aprendi a importância de testes automatizados para apontar erros que não aparecem localmente
+    </li>
+    <li>
+      Aprendi a importância de padronizar o ambiente de desenvolvimento, tanto para realizar testes quanto para fazer deploy
+    </li>
+  </ul>
+</details>
+
+<hr>
+
+<details>
+<summary><h2>Implementações futuras</h2></summary><br /> 
+  <ul>
+    <li>
+      Implementar autenticação em diversas rotas
+    </li>
+    <li>
+      Mudar algumas chaves na tabela e nos bodies para evitar ambiguidade. Ex: QtdeAtivo, Valor.
+    </li>
+    <li>
+      Realizar o deploy da aplicação
+    </li>
+    <li>
+      Melhorar a documentação da aplicação. Ex: Deixar explícito cada regra de negócios, utilizar o Swagger para documentar os endpoints.
+    </li>
+  </ul>
+</details>
+
+
 
 
 
