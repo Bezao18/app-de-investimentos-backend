@@ -21,11 +21,18 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
   <summary><strong>Como rodar a aplicação:</strong></summary><br />
  Como a aplicação utiliza um banco de dados local será necessário rodar um container Docker com uma imagem MySQL para conseguir realizar as requisições.
  <br>
- Primeiro rode <code>npm install</code> para instalar as dependências
+ - Primeiro rode <code>npm install</code> para instalar as dependências
  <br>
- Seguido de  <code>docker-compose up</code> para rodar o MySQL e <code>npm run db:reset</code> para criar o banco de dados
+ - Seguido de  <code>docker-compose up</code> para rodar o MySQL na porta 3306 e <code>npm run db:reset</code> para criar o banco de dados.
  <br>
- E por útilmo  <code>npm start</code> para rodar a aplicação. A API rodará na porta 3000 por padrão.
+ - E por útilmo  <code>npm start</code> para rodar a aplicação.
+ <hr>
+ A API rodará na porta 3000 por padrão mas pode ser definida no .env como PORT.
+ Caso já tenha MySQL localmente na máquina, poderá utilizá-lo criando um .env passando os valores 
+ para as seguintes variáveis: DB_USERNAME, DB_PASSWORD,  DB_HOST, DB_PORT.
+ <hr>
+ ⚠️Lembre-se de deixar as portas 3000 e 3306 vagas caso optar por não criar um arquivo .env⚠️
+ 
 </details>
 
 ## Processo de desenvolvimento
@@ -33,6 +40,7 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
 Foram consideradas as entidades: Ativos, Clientes, Ordens e Transações. E foram estabelecidas relações entre elas visando alcançar a normalização
 das tabelas, tendo em consideração que um aplicativo de investimentos precisaria manter um histórico da atividade dos clientes e ao mesmo tempo ter uma
 boa performance em escalas maiores. Como esse projeto apresenta uma escala menor, a performance não foi o foco dessa organização.
+
 
 
 
