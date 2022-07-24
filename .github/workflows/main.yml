@@ -16,6 +16,7 @@ jobs:
           node-version: 14
 
       - name: Roda o MySql através do Docker
+        run: docker login -u bernardo18 -p ${{ secrets.SECRET_TOKEN }}
         run: docker-compose up -d
 
       - name: Instala as dependências
