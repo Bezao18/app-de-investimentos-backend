@@ -1,6 +1,6 @@
 FROM mysql:5.7
 
-FROM node:alpine
+FROM node:14
 
 WORKDIR /app
 
