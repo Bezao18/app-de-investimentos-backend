@@ -1,4 +1,4 @@
+.nyc_output
 node_modules
 build
 .env
-.nyc_output
