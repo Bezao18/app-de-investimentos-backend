@@ -10,6 +10,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm db:reset
+RUN npm run db:reset
 
 CMD ["npm", "start"]
