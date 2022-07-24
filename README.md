@@ -30,7 +30,7 @@ e qualquer outra operação que um cliente poderia executar em um aplicativo fin
  <br>
   <ul>
     <li>Primeiro rode <code>npm install</code> para instalar as dependências</li>
-    <li>🚨Seguido de  <code>docker-compose up</code> para rodar o MySQL na porta 3306🚨</li> 
+    <li>🚨Seguido de  <code>docker-compose up -d</code> para rodar o MySQL na porta 3306🚨</li> 
     <li><code>npm run db:reset</code> para criar o banco de dados</li>
     <li>E por útilmo  <code>npm start</code> para rodar a aplicação</li>
   </ul>
