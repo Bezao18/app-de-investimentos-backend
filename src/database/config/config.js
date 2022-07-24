@@ -26,7 +26,6 @@ module.exports = {
     "password": 'password',
     "database": 'app-de-investimentos-test',
     "host": 'localhost',
-    "port": 3306,
     "dialect": "mysql"
   }
 }
