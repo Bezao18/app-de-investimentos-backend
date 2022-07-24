@@ -6,7 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=test npm run db:reset && mocha --require ts-node/register tests/**/*.test.ts --timeout 60000  --exit",
     "test:coverage": "NODE_ENV=test nyc mocha --require ts-node/register tests/**/*.test.ts --timeout 60000 --exit",
-    "build": "tsc && docker-compose up -d",
+    "build": "tsc",
+    "prestart": "tsc",
     "start": "node build/src/index.js",
     "dev": "nodemon --watch \"./src/*\" --ext \"ts,js\" --exec \"ts-node src/index.ts\"",
     "db:reset": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
@@ -38,6 +39,7 @@
     "@types/sequelize": "^4.28.14",
     "@types/shelljs": "^0.8.11",
     "@types/sinon": "^10.0.13",
+    "@types/swagger-ui-express": "^4.1.3",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
